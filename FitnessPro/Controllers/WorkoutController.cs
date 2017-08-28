@@ -6,9 +6,10 @@ using System.Web.Mvc;
 
 namespace FitnessPro.Controllers
 {
-    public class HomeController : Controller
+    public class WorkoutController : Controller
     {
-        public ActionResult Index()
+        // GET: Workout
+        public ActionResult List()
         {
             return View();
         }
