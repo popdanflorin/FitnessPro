@@ -3,5 +3,45 @@
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
+<div id="workoutInstances">
+    <h2>My Workouts</h2>
+    <input type="button" value="Plan Workout" class="btn btn-primary" data-toggle="modal" data-target="#workoutInstanceItem" data-bind="click:add" />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Data</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:WorkoutInstances">
+            <tr>
+                <td class="col-xs-5" data-bind="text:Name"></td>
+                <td class="col-xs-5" data-bind="text:Date"></td>
+                <td class="col-xs-5" data-bind="text:StatusDisplay"></td>
+                <td class="col-xs-1">
+                    <input type="button" value="Details" class="btn btn-info" data-toggle="modal" data-target="#workoutInstanceDetailsItem" data-bind="click:$parent.details" />
+                </td>
+                <td class="col-xs-1">
+                    <input type="button" value="Complete" class="btn btn-info" data-toggle="modal" data-target="#workoutInstanceCompleteItem" data-bind="click:$parent.complete" />
+                </td>
+                <td class="col-xs-1">
+                    <input type="button" value="Delete" class="btn btn-danger" data-bind="click:$parent.delete" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @Html.Partial("Item")
+    @Html.Partial("Item2")
+    @Html.Partial("Item3")
+</div>
+<script>
+    $(function () {
+        var vm = new WorkoutInstance();
+        vm.refresh();
+        ko.applyBindings(vm, $("#workoutInstances").get(0));
+    });
+</script>
 
