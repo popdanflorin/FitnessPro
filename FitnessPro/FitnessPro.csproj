@@ -196,6 +196,7 @@
     <Compile Include="Entities\Enums\EnumItem.cs" />
     <Compile Include="Entities\Enums\WorkoutType.cs" />
     <Compile Include="Entities\Workout.cs" />
+    <Compile Include="Entities\WorkoutExercise.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

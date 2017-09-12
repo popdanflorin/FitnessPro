@@ -27,6 +27,7 @@ namespace FitnessPro.Models
         }
 
         public DbSet<Workout> Workouts { get; set; }
+        public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
 
         public static ApplicationDbContext Create()
         {
