@@ -21,5 +21,15 @@ namespace FitnessPro.Entities.Enums
                 default: return String.Empty;
             }
         }
+        public static string ToString(this StatusType type)
+        {
+            switch (type)
+            {
+                case StatusType.Planned: return "Planned";
+                case StatusType.Completed: return "Completed";
+                
+                default: return String.Empty;
+            }
+        }
     }
 }
