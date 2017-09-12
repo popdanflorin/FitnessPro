@@ -191,12 +191,18 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\WorkoutController.cs" />
+    <Compile Include="Controllers\WorkoutInstanceController.cs" />
+    <Compile Include="Entities\Enums\StatusType.cs" />
+    <Compile Include="Entities\UserPerformance.cs" />
+    <Compile Include="Entities\WorkoutInstance.cs" />
     <Compile Include="Entities\Enums\EnumExtensions.cs" />
     <Compile Include="Entities\Enums\EnumItem.cs" />
     <Compile Include="Entities\Enums\WorkoutType.cs" />
     <Compile Include="Entities\Workout.cs" />
     <Compile Include="Entities\WorkoutExercise.cs" />
+    <Compile Include="Entities\WorkoutInstanceExercise.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -269,6 +275,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Workout\List.cshtml" />
     <Content Include="Views\Workout\Item.cshtml" />
+    <Content Include="Views\WorkoutInstance\List.cshtml" />
+    <Content Include="Views\Results\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
