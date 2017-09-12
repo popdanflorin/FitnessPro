@@ -280,10 +280,10 @@
     <Content Include="Views\WorkoutInstance\Item.cshtml" />
     <Content Include="Views\WorkoutInstance\Item2.cshtml" />
     <Content Include="Views\WorkoutInstance\Item3.cshtml" />
+    <Content Include="Views\Workout\Exercises.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Workout\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
