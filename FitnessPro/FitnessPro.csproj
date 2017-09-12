@@ -277,6 +277,9 @@
     <Content Include="Views\Workout\Item.cshtml" />
     <Content Include="Views\WorkoutInstance\List.cshtml" />
     <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\WorkoutInstance\Item.cshtml" />
+    <Content Include="Views\WorkoutInstance\Item2.cshtml" />
+    <Content Include="Views\WorkoutInstance\Item3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

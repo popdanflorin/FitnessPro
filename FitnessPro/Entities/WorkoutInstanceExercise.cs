@@ -17,5 +17,7 @@ namespace FitnessPro.Entities
         //trebuie ActualRtions -> to string pentru display?
         [ForeignKey("WorkoutInstanceId")]
         public WorkoutInstance WorkoutInstance { get; set; }
+        [ForeignKey("ExerciseId")]
+        public WorkoutExercise WorkoutExercise { get; set; }
     }
 }
