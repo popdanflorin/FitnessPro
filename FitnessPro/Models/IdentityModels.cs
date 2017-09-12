@@ -27,6 +27,7 @@ namespace FitnessPro.Models
         }
 
         public DbSet<Workout> Workouts { get; set; }
+        public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
         public DbSet<WorkoutInstance> WorkoutInstances { get; set; }
         public DbSet<WorkoutInstanceExercise> WorkoutInstanceExercises { get; set; }
         public DbSet<UserPerformance> UserPerformance { get; set; }
