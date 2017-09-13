@@ -1,0 +1,47 @@
+﻿
+<div id="workoutItem1" class="modal fade" role="dialog">
+  
+    <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Manage exercises</h4>
+            </div>
+            <div class="modal-body">
+                
+                <input type="button" value="New" class="btn btn-primary" data-toggle="modal" data-target="#workoutNewEx" data-bind="click:newexercises" />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:Exercises">
+                        <tr>
+                            <td class="col-xs-5" data-bind="text:Name"></td>
+                            <td class="col-xs-5" data-bind="text:Description"></td>
+                            <td class="col-xs-5" data-bind="text:Repetitions"></td>
+                            <td class="col-xs-1">
+                                <input type="button" value="Details" class="btn btn-info" data-toggle="modal" data-target="#workoutNewEx" data-bind="click:$parent.details" />
+                            </td>
+                            <td class="col-xs-1">
+                                <input type="button" value="Delete" class="btn btn-danger" data-bind="click:$parent.delete" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           <div class="modal-footer">
+               
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("NewExercise")
+</div>

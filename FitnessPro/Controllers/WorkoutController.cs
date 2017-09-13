@@ -36,5 +36,12 @@ namespace FitnessPro.Controllers
             var message = cService.DeleteWorkout(id);
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
+
+        [HttpPost]
+        public JsonResult GetEx(string workoutId)
+        {
+            var exercises = qService.GetExercises(workoutId);
+            return new JsonResult() { Data = new { Exercises = exercises }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
     }
 }

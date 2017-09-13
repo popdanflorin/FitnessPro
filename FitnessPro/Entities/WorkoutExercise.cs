@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace FitnessPro.Entities
 {
@@ -16,6 +17,7 @@ namespace FitnessPro.Entities
         public int Repetitions { get; set; }
         //def contrangere de tip foreignkey 
         [ForeignKey("WorkoutId")]
+        [ScriptIgnore]
         public virtual Workout Workout { get; set; }
     }
 }
