@@ -37,7 +37,6 @@ namespace FitnessPro.Controllers
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
 
-        [HttpPost]
         public JsonResult GetEx(string workoutId)
         {
             var exercises = qService.GetExercises(workoutId);

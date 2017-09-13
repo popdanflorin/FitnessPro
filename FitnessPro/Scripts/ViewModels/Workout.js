@@ -25,14 +25,11 @@
     };
     self.exercises = function (data) {
         var url = '/Workout/GetEx';
-        var id = JSON.stringify({
-            workoutId: data.Id,
-        });
         $.ajax(url, {
-            type: "post",
+            type: "get",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: id,
+            data: { workoutId: data.Id },
             success: function (data) {
                 console.log(data);
                 self.Exercises(data.Exercises);
