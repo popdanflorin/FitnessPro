@@ -5,7 +5,11 @@
     self.Id = ko.observable();
     self.Name = ko.observable();
     self.Description = ko.observable();
+    //aici
+    self.Repetitions = ko.observable();
+    //
     self.Type = ko.observable();
+    self.Exercises = ko.observableArray();
 
     self.details = function (data) {
         self.Id(data.Id);
@@ -19,6 +23,32 @@
         self.Description(null);
         self.Type(null);
     };
+    self.exercises = function (data) {
+        var url = '/Workout/GetEx';
+        var id = JSON.stringify({
+            workoutId: data.Id,
+        });
+        $.ajax(url, {
+            type: "post",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: id,
+            success: function (data) {
+                console.log(data);
+                self.Exercises(data.Exercises);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + ': ' + errorThrown);
+            }
+        });
+    }
+    //aici
+    self.newexercises = function (data) {
+        self.Id(data.Id);
+        self.Name(data.Name);
+        self.Repetitions(data.Repetitions)
+    }
+    //
     self.save = function () {
         var url = '/Workout/Save';
         var workout = JSON.stringify({

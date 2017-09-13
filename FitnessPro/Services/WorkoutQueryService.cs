@@ -13,9 +13,13 @@ namespace FitnessPro.Services
 
         public List<Workout> GetWorkouts()
         {
-            return ctx.Workouts.ToList();
+            var workouts = ctx.Workouts.ToList();
+            return workouts;
         }
-
+        public List<WorkoutExercise> GetExercises(string workoutid)
+        {
+            return ctx.WorkoutExercises.Where(x => x.WorkoutId == workoutid).ToList();
+        }
         public List<EnumItem> GetWorkoutTypes()
         {
             return Enum.GetValues(typeof(WorkoutType)).Cast<WorkoutType>().Select(x => new EnumItem() { Id = (int)x, Description = x.ToString() }).ToList();
