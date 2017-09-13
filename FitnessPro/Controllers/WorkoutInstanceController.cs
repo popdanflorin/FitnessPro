@@ -10,6 +10,7 @@ namespace FitnessPro.Controllers
         private WorkoutInstanceQueryService qService = new WorkoutInstanceQueryService();
         private WorkoutInstanceCommandService cService = new WorkoutInstanceCommandService();
         private WorkoutQueryService WqService = new WorkoutQueryService();
+        private  WorkoutCommandService WcService = new WorkoutCommandService();
         // GET: WorkoutInstance
         public ActionResult List()
         {
@@ -20,9 +21,15 @@ namespace FitnessPro.Controllers
         {
             var workouts = WqService.GetWorkouts();
             var workoutInstanes = qService.GetWorkoutInstances();
-            var workoutExercises = qService.GetWorkoutExercises();
-            return new JsonResult() { Data = new { Workouts = workouts, WorkoutInstances=workoutInstanes, WorkoutExercises=workoutExercises }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new JsonResult() { Data = new { Workouts = workouts, WorkoutInstances=workoutInstanes }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        public JsonResult RefreshExercises(string workoutId)
+        {
+            var instanceExercises = qService.GetWorkoutExercisesForCreation(workoutId);
+            return new JsonResult() { Data = new { Exercises = instanceExercises }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
 
         [HttpPost]
         public JsonResult Save(WorkoutInstance workoutInstance)

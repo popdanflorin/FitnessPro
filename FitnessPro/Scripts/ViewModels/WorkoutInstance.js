@@ -11,7 +11,26 @@
     self.Status = ko.observable();
     self.UserId = ko.observable();
 
-
+    self.changeWorkout = function (data) {
+        if (data == undefined)
+            return;
+        var workoutId = $('#WorkoutName').val();
+        var url = '/WorkoutInstance/RefreshExercises';
+        $.ajax(url, {
+            type: "get",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: { workoutId: workoutId },
+            success: function (data) {
+                console.log(data);
+                self.WorkoutInstanceExercises(data.Exercises);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + ': ' + errorThrown);
+            }
+        });
+    
+    }
     self.details = function (data) {
         self.Id(data.Id);
         self.WorkoutId(data.WorkoutId);
@@ -77,7 +96,7 @@
                 console.log(data);
                 self.Workouts(data.Workouts);
                 self.WorkoutInstances(data.WorkoutInstances);
-                self.WorkoutExercises(data.WorkoutExercises);
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);

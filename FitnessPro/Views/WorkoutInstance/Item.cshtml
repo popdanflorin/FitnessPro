@@ -8,8 +8,8 @@
                 <h4 class="modal-title">Plan workout</h4>
             </div>
             <div class="modal-body">
-                <label for="Name">Name</label>
-                <select id="Name" class="form-control" data-bind="options:Workouts, optionsText: 'Name', optionsValue: 'Id', value: Workout, optionsCaption: 'Choose...'"></select>
+                <label for="WorkoutName">Name</label>
+                <select id="WorkoutName" class="form-control" data-bind="options:Workouts, optionsText: 'Name', optionsValue: 'Id', value: Workout, optionsCaption: 'Choose...', event:{ change:changeWorkout}"></select>
                 <label for="Date">Date</label>
                 <input id="Date" type="date" class="form-control" data-bind="value: Date">
                 <table class="table">
@@ -23,8 +23,8 @@
                     </thead>
                     <tbody data-bind="foreach:WorkoutInstanceExercises">
                         <tr>
-                            <td class="col-xs-5" data-bind="text:Name"></td>
-                            <td input id="PlannedRepetitions" type="number" class="form-control" data-bind="value: Date">
+                            <td class="col-xs-5" data-bind="text:ExerciseName"></td>
+                            <td><input id="Repetitions" type="number "class="form-control" data-bind="value: PlannedRepetitions"</td>
                         </tr>
                     </tbody>
                 </table>

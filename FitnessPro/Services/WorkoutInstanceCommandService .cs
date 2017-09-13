@@ -1,9 +1,7 @@
 ﻿using FitnessPro.Entities;
 using FitnessPro.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace FitnessPro.Services
 {
