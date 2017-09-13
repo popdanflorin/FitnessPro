@@ -9,9 +9,9 @@
             </div>
             <div class="modal-body">
                 <label for="Name">Name</label>
-                <input id="Name" type="text" class="form-control" data-bind="value: Name">
+                <select id="Name" class="form-control" data-bind="options:Workouts, optionsText: 'Name', optionsValue: 'Id', value: Workout, optionsCaption: 'Choose...'"></select>
                 <label for="Date">Date</label>
-                <input id="Date" type="text" class="form-control" data-bind="value: Date">
+                <input id="Date" type="date" class="form-control" data-bind="value: Date">
                 <table class="table">
                     <thead>
                         <tr>
@@ -24,7 +24,7 @@
                     <tbody data-bind="foreach:WorkoutInstanceExercises">
                         <tr>
                             <td class="col-xs-5" data-bind="text:Name"></td>
-                            <td class="col-xs-5" data-bind="text:PlanedRepetitions"></td>
+                            <td input id="PlannedRepetitions" type="number" class="form-control" data-bind="value: Date">
                         </tr>
                     </tbody>
                 </table>

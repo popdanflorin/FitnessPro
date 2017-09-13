@@ -21,8 +21,16 @@ namespace FitnessPro.Entities
             }
 
         }
+        
         [ForeignKey("WorkoutId")]
         public Workout Workout { get; set; }
 
+        public string WorkoutName
+        {
+            get
+            {
+                return Workout.Name;
+            }
+        }
     }
 }
