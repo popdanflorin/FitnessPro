@@ -32,12 +32,12 @@ namespace FitnessPro.Controllers
 
 
         [HttpPost]
-        public JsonResult Save(WorkoutInstance workoutInstance)
+        public JsonResult SaveInstanceWithExercises(WorkoutInstance workoutInstance, System.Collections.Generic.List<WorkoutInstanceExercise> workoutInstanceExercises)
        {
-            var message = cService.SaveWorkoutInstance(workoutInstance);
+            var message = cService.SaveWorkoutInstanceWithExercises(workoutInstance,workoutInstanceExercises);
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
-
+       
         [HttpPost]
         public JsonResult Delete(string id)
         {
