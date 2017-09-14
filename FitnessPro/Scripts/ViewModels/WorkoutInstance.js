@@ -11,7 +11,27 @@
     self.Status = ko.observable();
     self.UserId = ko.observable();
 
-
+    self.changeWorkout = function (data) {
+        if (data == undefined)
+            return;
+        var workoutId = $('#WorkoutName').val();
+        self.WorkoutId(workoutId);
+        var url = '/WorkoutInstance/RefreshExercises';
+        $.ajax(url, {
+            type: "get",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: { workoutId: workoutId },
+            success: function (data) {
+                console.log(data);
+                self.WorkoutInstanceExercises(data.Exercises);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + ': ' + errorThrown);
+            }
+        });
+    
+    }
     self.details = function (data) {
         self.Id(data.Id);
         self.WorkoutId(data.WorkoutId);
@@ -28,18 +48,27 @@
         self.UserId(null);
     };
     self.save = function () {
-        var url = '/WorkoutInstance/Save';
+        var url = '/WorkoutInstance/SaveInstanceWithExercises';
         var workoutInstance = JSON.stringify({
             Id: self.Id(),
             WorkoutId: self.WorkoutId(),
             Date: self.Date(),
-            Status: self.Status()
+            Status: self.Status(),
+            UserId: self.UserId(),
         });
+        var WorkoutInstanceExercises = JSON.stringify({
+            WorkoutInstanceExercises: self.WorkoutInstanceExercises
+        });
+        /*var postData = {
+            workoutInstance: workoutInstance,
+            WorkoutInstanceExercises: WorkoutInstanceExercises
+        };*/
         $.ajax(url, {
             type: "post",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: workoutInstance,
+            //data: JSON.stringify(postData),
+            data: {workoutInstance,WorkoutInstanceExercises },
             success: function (data) {
                 console.log(data);
                 self.refresh();
@@ -48,6 +77,7 @@
                 console.log(textStatus + ': ' + errorThrown);
             }
         });
+        
     };
     self.delete = function (data) {
         var url = '/Workout/Delete';
@@ -77,7 +107,7 @@
                 console.log(data);
                 self.Workouts(data.Workouts);
                 self.WorkoutInstances(data.WorkoutInstances);
-                self.WorkoutExercises(data.WorkoutExercises);
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);
