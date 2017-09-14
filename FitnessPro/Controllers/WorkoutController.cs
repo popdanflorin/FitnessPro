@@ -29,6 +29,14 @@ namespace FitnessPro.Controllers
             var message = cService.SaveWorkout(workout);
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
+        //save exercise
+        [HttpPost]
+        public JsonResult SaveEx(WorkoutExercise exercise)
+        {
+            var message = cService.SaveWorkoutexercise(exercise);
+            return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
+        }
+        //
 
         [HttpPost]
         public JsonResult Delete(string id)

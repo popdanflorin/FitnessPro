@@ -57,5 +57,31 @@ namespace FitnessPro.Services
                 return ErrorMessage;
             }
         }
+        //save workoutexercise
+        public string SaveWorkoutexercise(WorkoutExercise exercise)
+        {
+            try
+            {
+                var oldexercise = ctx.WorkoutExercises.FirstOrDefault(f => f.Id == exercise.Id);
+                if (oldexercise == null)
+                {
+                    exercise.Id = Guid.NewGuid().ToString();
+                    ctx.WorkoutExercises.Add(exercise);
+                }
+                else
+                {
+                    oldexercise.Name = exercise.Name;
+                    oldexercise.Description = exercise.Description;
+                    oldexercise.Repetitions = exercise.Repetitions;
+                }
+
+                ctx.SaveChanges();
+                return SuccessMessage;
+            }
+            catch
+            {
+                return ErrorMessage;
+            }
+        }
     }
 }
