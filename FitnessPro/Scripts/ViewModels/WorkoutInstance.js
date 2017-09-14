@@ -51,7 +51,6 @@
         var workoutInstance = JSON.stringify({
             Id: self.Id(),
             WorkoutId: self.WorkoutId(),
-            Name: self.Name(),
             Date: self.Date(),
             Status: self.Status(),
             UserId: self.UserId(),
