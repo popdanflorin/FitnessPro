@@ -15,6 +15,7 @@
         if (data == undefined)
             return;
         var workoutId = $('#WorkoutName').val();
+        self.WorkoutId(workoutId);
         var url = '/WorkoutInstance/RefreshExercises';
         $.ajax(url, {
             type: "get",
