@@ -8,8 +8,7 @@
                 <h4 class="modal-title">Complete the workout</h4>
             </div>
             <div class="modal-body">
-                <label for="Name">Name</label>
-                <input id="Name" type="text" class="form-control" data-bind="value: Name">
+                <p>Name: <strong data-bind="text: WorkoutName"></strong></p>
                 <label for="Exercises">Exercises</label>
                 <table class="table">
                     <thead>
@@ -23,14 +22,15 @@
                     </thead>
                     <tbody data-bind="foreach:WorkoutInstanceExercises">
                         <tr>
-                            <td class="col-xs-5" data-bind="text:Name"></td>
-                            <td class="col-xs-5" data-bind="text:PlanedRepetitions"></td>   
-                            <td class="col-xs-5" data-bind="text:ActualRepetitions"></td>               
+                            <td class="col-xs-5" data-bind="text:ExerciseName"></td>
+                            <td class="col-xs-5" data-bind="text:PlannedRepetitions"></td>   
+                            <td><input id="ActualRepetitions" type="number " class="form-control" data-bind="value: ActualRepetitions"</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click:save">Save</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>

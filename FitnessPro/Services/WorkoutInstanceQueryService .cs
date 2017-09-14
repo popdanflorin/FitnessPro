@@ -20,8 +20,14 @@ namespace FitnessPro.Services
             return ctx.WorkoutInstances.Include("Workout").ToList();
         }
 
-        public List<WorkoutExercise> GetWorkoutExercises() {
-            return ctx.WorkoutExercises.ToList();
+        public List<WorkoutInstanceExercise> GetWorkoutInstanceExercises(string workoutInstanceId) {
+            var exercises = ctx.WorkoutExercises.ToList();
+            var wiex = ctx.WorkoutInstanceExercises.Where(wix => wix.WorkoutInstanceId == workoutInstanceId).ToList();
+            foreach (var item in wiex)
+            {
+                item.ExerciseName = exercises.FirstOrDefault(e => e.Id == item.ExerciseId).Name;
+            }
+            return wiex;
         }
 
         public List<WorkoutInstanceExercise> GetWorkoutExercisesForCreation(string workoutId)

@@ -8,11 +8,8 @@
                 <h4 class="modal-title">Workout plan details</h4>
             </div>
             <div class="modal-body">
-                <label for="Name">Name</label>
-                <input id="Name" type="text" class="form-control"  data-bind="value: Name">
-                
-                <label for="Date">Date</label>
-                <input id="Date" type="text" class="form-control" data-bind="value: Date">
+                <p>Name: <strong data-bind="text: WorkoutName"></strong></p>
+                <p>Date: <strong data-bind="text: Date"></strong></p>
                 <label for="Exercises">Exercises</label>
                 <table class="table">
                     <thead>
@@ -25,8 +22,8 @@
                     </thead>
                     <tbody data-bind="foreach:WorkoutInstanceExercises">
                         <tr>
-                            <td class="col-xs-5" data-bind="text:Name"></td>
-                            <td class="col-xs-5" data-bind="text:Repetitions"></td>            
+                            <td class="col-xs-5" data-bind="text:ExerciseName"></td>
+                            <td class="col-xs-5" data-bind="text:PlannedRepetitions"></td>            
                         </tr>
                     </tbody>
                 </table>

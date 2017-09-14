@@ -2,6 +2,7 @@
 using FitnessPro.Entities;
 using FitnessPro.Services;
 using System.Text;
+using System.Collections.Generic;
 
 namespace FitnessPro.Controllers
 {
@@ -10,7 +11,7 @@ namespace FitnessPro.Controllers
         private WorkoutInstanceQueryService qService = new WorkoutInstanceQueryService();
         private WorkoutInstanceCommandService cService = new WorkoutInstanceCommandService();
         private WorkoutQueryService WqService = new WorkoutQueryService();
-        private  WorkoutCommandService WcService = new WorkoutCommandService();
+        private WorkoutCommandService WcService = new WorkoutCommandService();
         // GET: WorkoutInstance
         public ActionResult List()
         {
@@ -21,7 +22,7 @@ namespace FitnessPro.Controllers
         {
             var workouts = WqService.GetWorkouts();
             var workoutInstanes = qService.GetWorkoutInstances();
-            return new JsonResult() { Data = new { Workouts = workouts, WorkoutInstances=workoutInstanes }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new JsonResult() { Data = new { Workouts = workouts, WorkoutInstances = workoutInstanes }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         public JsonResult RefreshExercises(string workoutId)
@@ -30,14 +31,19 @@ namespace FitnessPro.Controllers
             return new JsonResult() { Data = new { Exercises = instanceExercises }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        public JsonResult RefreshExercisesForDetails(string workoutInstanceId)
+        {
+            var instanceExercises = qService.GetWorkoutInstanceExercises(workoutInstanceId);
+            return new JsonResult() { Data = new { Exercises = instanceExercises }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
         [HttpPost]
-        public JsonResult SaveInstanceWithExercises(WorkoutInstance workoutInstance, System.Collections.Generic.List<WorkoutInstanceExercise> workoutInstanceExercises)
-       {
-            var message = cService.SaveWorkoutInstanceWithExercises(workoutInstance,workoutInstanceExercises);
+        public JsonResult SaveInstanceWithExercises(WorkoutInstance workoutInstance, List<WorkoutInstanceExercise> vIExercises)
+        {
+            var message = cService.SaveWorkoutInstanceWithExercises(workoutInstance, vIExercises);
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
-       
+
         [HttpPost]
         public JsonResult Delete(string id)
         {
