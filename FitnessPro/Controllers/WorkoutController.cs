@@ -16,6 +16,8 @@ namespace FitnessPro.Controllers
             return View();
         }
 
+        #region "Workouts"
+
         public JsonResult ListRefresh()
         {
             var workouts = qService.GetWorkouts();
@@ -29,14 +31,6 @@ namespace FitnessPro.Controllers
             var message = cService.SaveWorkout(workout);
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
-        //save exercise
-        [HttpPost]
-        public JsonResult SaveEx(WorkoutExercise exercise)
-        {
-            var message = cService.SaveWorkoutexercise(exercise);
-            return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
-        }
-        //
 
         [HttpPost]
         public JsonResult Delete(string id)
@@ -45,10 +39,23 @@ namespace FitnessPro.Controllers
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
 
+        #endregion
+
+        #region "Workout exercises"
+
+        [HttpPost]
+        public JsonResult SaveEx(WorkoutExercise exercise)
+        {
+            var message = cService.SaveWorkoutexercise(exercise);
+            return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
+        }
+
         public JsonResult GetEx(string workoutId)
         {
             var exercises = qService.GetExercises(workoutId);
             return new JsonResult() { Data = new { Exercises = exercises }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        #endregion
     }
 }
