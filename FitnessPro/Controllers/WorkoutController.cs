@@ -57,5 +57,11 @@ namespace FitnessPro.Controllers
         }
 
         #endregion
+        [HttpPost]
+        public JsonResult DeleteEx(string id)
+        {
+            var message = cService.DeleteWorkoutExercise(id);
+            return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
+        }
     }
 }

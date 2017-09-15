@@ -46,13 +46,15 @@ namespace FitnessPro.Services
                 var workout = ctx.Workouts.FirstOrDefault(f => f.Id == id);
                 if (workout != null)
                 {
+                    var exercises = ctx.WorkoutExercises.Where(we => we.WorkoutId == workout.Id);
+                    ctx.WorkoutExercises.RemoveRange(exercises);
                     ctx.Workouts.Remove(workout);
                     ctx.SaveChanges();
                     return SuccessMessage;
                 }
                 return ItemNotFoundMessage;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return ErrorMessage;
             }
@@ -79,6 +81,25 @@ namespace FitnessPro.Services
                 return SuccessMessage;
             }
             catch
+            {
+                return ErrorMessage;
+            }
+        }
+        //delete WorkoutExercise
+        public string DeleteWorkoutExercise(string id)
+        {
+            try
+            {
+                var exercise = ctx.WorkoutExercises.FirstOrDefault(f => f.Id == id);
+                if (exercise != null)
+                {
+                    ctx.WorkoutExercises.Remove(exercise);
+                    ctx.SaveChanges();
+                    return SuccessMessage;
+                }
+                return ItemNotFoundMessage;
+            }
+            catch (Exception)
             {
                 return ErrorMessage;
             }

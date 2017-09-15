@@ -56,16 +56,17 @@
    
     self.delete = function (data) {
         var url = '/Workout/Delete';
-        var food = JSON.stringify({
+        var workout = JSON.stringify({
             id: data.Id
         });
         $.ajax(url, {
             type: "post",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: food,
+            data: workout,
             success: function (data) {
                 console.log(data);
+                alert(data);
                 self.refresh();
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -135,6 +136,25 @@
             Name: self.ExName(),
             Description: self.ExDescription(),
             Repetitions: self.Repetitions(),
+        });
+        $.ajax(url, {
+            type: "post",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: exercise,
+            success: function (data) {
+                console.log(data);
+                self.refresh();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + ': ' + errorThrown);
+            }
+        });
+    };
+    self.deleteEx = function (data) {
+        var url = '/Workout/DeleteEx';
+        var exercise = JSON.stringify({
+            id: data.Id
         });
         $.ajax(url, {
             type: "post",

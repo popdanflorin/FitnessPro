@@ -50,5 +50,7 @@ namespace FitnessPro.Controllers
             var message = cService.DeleteWorkoutInstance(id);
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
+      
+
     }
 }
