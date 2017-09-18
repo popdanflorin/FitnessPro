@@ -99,7 +99,7 @@ namespace FitnessPro.Services
                 }
                 return ItemNotFoundMessage;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return ErrorMessage;
             }

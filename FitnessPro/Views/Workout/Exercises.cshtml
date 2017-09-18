@@ -7,6 +7,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
                 <h4 class="modal-title">Manage exercises</h4>
             </div>
             <div class="modal-body">
@@ -31,7 +32,7 @@
                                 <input type="button" value="Details" class="btn btn-info" data-toggle="modal" data-target="#workoutNewEx" data-bind="click:$parent.getExDetails" />
                             </td>
                             <td class="col-xs-1">
-                                <input type="button" value="Delete" class="btn btn-danger" data-bind="click:$parent.delete" />
+                                <input type="button" value="Delete" class="btn btn-danger" data-bind="click:$parent.deleteEx" />
                             </td>
                         </tr>
                     </tbody>

@@ -145,6 +145,7 @@
             success: function (data) {
                 console.log(data);
                 self.refresh();
+                $('#workoutNewEx').modal('hide');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);
@@ -152,6 +153,7 @@
         });
     };
     self.deleteEx = function (data) {
+        var workoutId = data.WorkoutId;
         var url = '/Workout/DeleteEx';
         var exercise = JSON.stringify({
             id: data.Id
@@ -163,11 +165,43 @@
             data: exercise,
             success: function (data) {
                 console.log(data);
-                self.refresh();
+                self.refreshEx(workoutId)
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);
             }
         });
     };
+
+    self.refreshEx = function (id) {
+        var url = '/Workout/GetEx';
+        $.ajax(url, {
+            type: "get",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: { workoutId: id },
+            success: function (data) {
+                console.log(data);
+                self.Exercises(data.Exercises);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + ': ' + errorThrown);
+            }
+        });
+    };
+    self.hideNewExercise = function ()
+    {
+        $('#workoutNewEx').modal('hide');
+    }
+
+    self.holdForDeleteEx = function (data) {
+        self.Id(data.Id);
+        //self.ExId(data.ExId);
+        self.Name(data.Name);
+        self.Description(data.Description);
+        self.Type(data.Type);
+        self.Exercises(data.Exercises);
+        
+    }
+    
 }
