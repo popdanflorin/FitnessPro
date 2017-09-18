@@ -240,6 +240,10 @@
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\ViewModels\WorkoutInstance.js" />
@@ -285,6 +289,7 @@
     <Content Include="Views\WorkoutInstance\Item3.cshtml" />
     <Content Include="Views\Workout\Exercises.cshtml" />
     <Content Include="Views\Workout\Newexercise.cshtml" />
+    <Content Include="Views\WorkoutInstance\Item4.cshtml" />
     <Content Include="Views\Workout\Item2.cshtml" />
   </ItemGroup>
   <ItemGroup>

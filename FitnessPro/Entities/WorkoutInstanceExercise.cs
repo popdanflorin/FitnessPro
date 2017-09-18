@@ -15,6 +15,7 @@ namespace FitnessPro.Entities
         public string ExerciseName { get; set; }
         public int PlannedRepetitions { get; set; }
         public int ActualRepetitions { get; set; }
+        public Boolean Active { get; set; }
         //trebuie PlannedRepetitions -> to string pentru display?
         //trebuie ActualRtions -> to string pentru display?
         [ForeignKey("WorkoutInstanceId")]

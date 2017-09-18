@@ -15,21 +15,24 @@ namespace FitnessPro.Services
         public List<Workout> GetWorkouts()
         {
             return ctx.Workouts.ToList();
+            // active
         }
         //get workoutexercises
         public List<WorkoutExercise> GetExercises()
         {
-            return ctx.WorkoutExercises.ToList();
+            return ctx.WorkoutExercises.ToList(); 
+            //active
         }
 
         //
         public List<WorkoutInstance> GetWorkoutInstances() {
-            return ctx.WorkoutInstances.Include("Workout").ToList();
+            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Active == true).ToList();
         }
 
         public List<WorkoutInstanceExercise> GetWorkoutInstanceExercises(string workoutInstanceId) {
             var exercises = ctx.WorkoutExercises.ToList();
-            var wiex = ctx.WorkoutInstanceExercises.Where(wix => wix.WorkoutInstanceId == workoutInstanceId).ToList();
+            //var exercises = ctx.WorkoutExercises.Where(we => we.Active == true).ToList(); 
+            var wiex = ctx.WorkoutInstanceExercises.Where(wix => (wix.WorkoutInstanceId == workoutInstanceId) &&( wix.Active == true)).ToList();
             foreach (var item in wiex)
             {
                 item.ExerciseName = exercises.FirstOrDefault(e => e.Id == item.ExerciseId).Name;
@@ -48,6 +51,7 @@ namespace FitnessPro.Services
                 wie.ExerciseId = ex.Id;
                 wie.ExerciseName = ex.Name;
                 wie.PlannedRepetitions = ex.Repetitions;
+                wie.Active = true;
                 result.Add(wie);
             }
             return result;

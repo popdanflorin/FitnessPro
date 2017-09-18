@@ -14,6 +14,7 @@ namespace FitnessPro.Entities
         public DateTime Date { get; set; }
         public StatusType Status { get; set; }
         public string UserId { get; set; }
+        public Boolean Active { get; set; }
         public string StatusDisplay
         {
             get {
@@ -29,7 +30,7 @@ namespace FitnessPro.Entities
         {
             get
             {
-                return Workout.Name;
+                return Workout.Name; 
             }
         }
     }

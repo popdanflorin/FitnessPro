@@ -11,14 +11,16 @@ namespace FitnessPro.Services
     {
         private ApplicationDbContext ctx = new ApplicationDbContext();
 
-        public List<Workout> GetWorkouts()
+        public List<Workout> GetWorkouts()   
         {
             var workouts = ctx.Workouts.ToList();
+            //active
             return workouts;
         }
         public List<WorkoutExercise> GetExercises(string workoutid)
         {
-            return ctx.WorkoutExercises.Where(x => x.WorkoutId == workoutid).ToList();
+            return ctx.WorkoutExercises.Where(x => x.WorkoutId == workoutid).ToList(); 
+            //active
         }
         public List<EnumItem> GetWorkoutTypes()
         {

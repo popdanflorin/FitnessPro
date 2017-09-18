@@ -19,16 +19,16 @@
         <tbody data-bind="foreach:WorkoutInstances">
             <tr>
                 <td class="col-xs-5" data-bind="text:WorkoutName"></td>
-                <td class="col-xs-5" data-bind="text:Date"></td>
+                <td class="col-xs-5" data-bind="text:moment(Date).format('LL')"></td>
                 <td class="col-xs-5" data-bind="text:StatusDisplay"></td>
                 <td class="col-xs-1">
                     <input type="button" value="Details" class="btn btn-info" data-toggle="modal" data-target="#workoutInstanceDetailsItem" data-bind="click:$parent.details" />
                 </td>
                 <td class="col-xs-1">
-                    <input type="button" value="Complete" class="btn btn-info" data-toggle="modal" data-target="#workoutInstanceCompleteItem" data-bind="click:$parent.save" />
+                    <input type="button" value="Complete" class="btn btn-info" data-toggle="modal" data-target="#workoutInstanceCompleteItem" data-bind="click:$parent.complete, visible:!Status" />
                 </td>
                 <td class="col-xs-1">
-                    <input type="button" value="Delete" class="btn btn-danger" data-bind="click:$parent.delete" />
+                    <input type="button" value="Delete" class="btn btn-danger" data-toggle="modal" data-target="#workoutInstanceDeleteItem" data-bind="click:$parent.deleteWindow" />
                 </td>
             </tr>
         </tbody>
@@ -36,6 +36,7 @@
     @Html.Partial("Item")
     @Html.Partial("Item2")
     @Html.Partial("Item3")
+    @Html.Partial("Item4")
 </div>
 <script>
     $(function () {

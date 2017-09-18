@@ -20,17 +20,23 @@ namespace FitnessPro.Services
                 if (oldWorkoutInstance == null)
                 {
                     workoutInstance.Id = Guid.NewGuid().ToString();
+                    workoutInstance.Active = true;
                     ctx.WorkoutInstances.Add(workoutInstance);
                 }
                 else
                 {
                     oldWorkoutInstance.WorkoutId = workoutInstance.WorkoutId;
-                    oldWorkoutInstance.Date = workoutInstance.Date;
+                    if (workoutInstance.Status == Entities.Enums.StatusType.Planned) {
+                        if (workoutInstance.Date != DateTime.MinValue)
+                        {
+                            oldWorkoutInstance.Date = workoutInstance.Date;
+                        }
+                    };
                     oldWorkoutInstance.Status = workoutInstance.Status;
                     oldWorkoutInstance.UserId = workoutInstance.UserId;
+                    oldWorkoutInstance.Active = workoutInstance.Active;
                 }
 
-                var changed = 0;
                 foreach (var wIE in workoutInstanceExercises)
                 {
                     var oldWorkoutInstanceExercise = ctx.WorkoutInstanceExercises.FirstOrDefault(f => f.Id == wIE.Id);
@@ -42,16 +48,11 @@ namespace FitnessPro.Services
                     }
                     else
                     {
-                        oldWorkoutInstanceExercise.WorkoutInstanceId = oldWorkoutInstance.Id;
-                        oldWorkoutInstanceExercise.Id = wIE.Id;
-                        oldWorkoutInstanceExercise.ExerciseName = wIE.ExerciseName;
-                        oldWorkoutInstanceExercise.ExerciseId = wIE.ExerciseId;
                         oldWorkoutInstanceExercise.PlannedRepetitions = wIE.PlannedRepetitions;
                         oldWorkoutInstanceExercise.ActualRepetitions = wIE.ActualRepetitions;
-                        if (oldWorkoutInstanceExercise.ActualRepetitions > 0) changed = 1;
                     }
                 }
-                if (changed == 1) oldWorkoutInstance.Status = Entities.Enums.StatusType.Completed;
+                
                 ctx.SaveChanges();
                 return SuccessMessage;
             }
@@ -68,7 +69,13 @@ namespace FitnessPro.Services
                 var workoutInstance = ctx.WorkoutInstances.FirstOrDefault(f => f.Id == id);
                 if (workoutInstance != null)
                 {
-                    ctx.WorkoutInstances.Remove(workoutInstance);
+                    var wIExercises = ctx.WorkoutInstanceExercises.Where(wie => wie.WorkoutInstanceId == workoutInstance.Id);
+                    foreach (var wIE in wIExercises) {
+                        wIE.Active = false;
+                    };
+                    workoutInstance.Active = false;
+                    //ctx.WorkoutInstanceExercises.RemoveRange(wIExercises);
+                    //ctx.WorkoutInstances.Remove(workoutInstance);
                     ctx.SaveChanges();
                     return SuccessMessage;
                 }
