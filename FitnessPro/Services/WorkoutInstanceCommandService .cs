@@ -25,12 +25,13 @@ namespace FitnessPro.Services
                 else
                 {
                     oldWorkoutInstance.WorkoutId = workoutInstance.WorkoutId;
-                    oldWorkoutInstance.Date = workoutInstance.Date;
+                    if (workoutInstance.Status == Entities.Enums.StatusType.Planned) {
+                        oldWorkoutInstance.Date = workoutInstance.Date;
+                    };
                     oldWorkoutInstance.Status = workoutInstance.Status;
                     oldWorkoutInstance.UserId = workoutInstance.UserId;
                 }
 
-                var changed = 0;
                 foreach (var wIE in workoutInstanceExercises)
                 {
                     var oldWorkoutInstanceExercise = ctx.WorkoutInstanceExercises.FirstOrDefault(f => f.Id == wIE.Id);
@@ -48,10 +49,10 @@ namespace FitnessPro.Services
                         oldWorkoutInstanceExercise.ExerciseId = wIE.ExerciseId;
                         oldWorkoutInstanceExercise.PlannedRepetitions = wIE.PlannedRepetitions;
                         oldWorkoutInstanceExercise.ActualRepetitions = wIE.ActualRepetitions;
-                        if (oldWorkoutInstanceExercise.ActualRepetitions > 0) changed = 1;
+                       
                     }
                 }
-                if (changed == 1) oldWorkoutInstance.Status = Entities.Enums.StatusType.Completed;
+                
                 ctx.SaveChanges();
                 return SuccessMessage;
             }
@@ -68,6 +69,8 @@ namespace FitnessPro.Services
                 var workoutInstance = ctx.WorkoutInstances.FirstOrDefault(f => f.Id == id);
                 if (workoutInstance != null)
                 {
+                    var wIExercises = ctx.WorkoutInstanceExercises.Where(wie => wie.WorkoutInstanceId == workoutInstance.Id);
+                    ctx.WorkoutInstanceExercises.RemoveRange(wIExercises);
                     ctx.WorkoutInstances.Remove(workoutInstance);
                     ctx.SaveChanges();
                     return SuccessMessage;

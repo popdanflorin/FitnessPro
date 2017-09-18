@@ -11,6 +11,7 @@
     self.Status = ko.observable();
     self.UserId = ko.observable();
 
+
     self.changeWorkout = function (data) {
         if (data == undefined)
             return;
@@ -38,6 +39,28 @@
         self.Name(data.Name);
         self.Date(data.Date);
         self.Status(data.Status);
+        self.UserId(data.UserId);
+        var url = '/WorkoutInstance/RefreshExercisesForDetails';
+        $.ajax(url, {
+            type: "get",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: { workoutInstanceId: self.Id() },
+            success: function (data) {
+                console.log(data);
+                self.WorkoutInstanceExercises(data.Exercises);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + ': ' + errorThrown);
+            }
+        });
+    };
+    self.complete = function (data) {
+        self.Id(data.Id);
+        self.WorkoutId(data.WorkoutId);
+        self.Name(data.Name);
+        self.Date(data.Date);
+        self.Status(1);
         self.UserId(data.UserId);
         var url = '/WorkoutInstance/RefreshExercisesForDetails';
         $.ajax(url, {
@@ -95,6 +118,9 @@
         });
 
     };
+    
+
+    
     self.delete = function (data) {
         var url = '/WorkoutInstance/Delete';
         var food = JSON.stringify({
