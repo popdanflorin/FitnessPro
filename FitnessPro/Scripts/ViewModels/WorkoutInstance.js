@@ -96,7 +96,7 @@
 
     };
     self.delete = function (data) {
-        var url = '/Workout/Delete';
+        var url = '/WorkoutInstance/Delete';
         var food = JSON.stringify({
             id: data.Id
         });
