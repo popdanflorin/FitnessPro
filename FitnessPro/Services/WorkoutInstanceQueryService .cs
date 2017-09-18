@@ -16,6 +16,13 @@ namespace FitnessPro.Services
         {
             return ctx.Workouts.ToList();
         }
+        //get workoutexercises
+        public List<WorkoutExercise> GetExercises()
+        {
+            return ctx.WorkoutExercises.ToList();
+        }
+
+        //
         public List<WorkoutInstance> GetWorkoutInstances() {
             return ctx.WorkoutInstances.Include("Workout").ToList();
         }
