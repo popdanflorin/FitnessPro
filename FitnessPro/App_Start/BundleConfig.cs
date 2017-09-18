@@ -27,6 +27,9 @@ namespace FitnessPro
 
             bundles.Add(new ScriptBundle("~/bundles/viewModels").Include(
                       "~/Scripts/ViewModels/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                      "~/Scripts/moment.js",
+                      "~/Scripts/moment-with-locales.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

@@ -10,7 +10,9 @@
     self.Date = ko.observable();
     self.Status = ko.observable();
     self.UserId = ko.observable();
-
+    self.Active = ko.observable();
+    self.WorkoutName = ko.observable();
+   
 
     self.changeWorkout = function (data) {
         if (data == undefined)
@@ -40,6 +42,8 @@
         self.Date(data.Date);
         self.Status(data.Status);
         self.UserId(data.UserId);
+        self.Active(data.Active);
+        self.WorkoutName(data.WorkoutName);
         var url = '/WorkoutInstance/RefreshExercisesForDetails';
         $.ajax(url, {
             type: "get",
@@ -55,6 +59,7 @@
             }
         });
     };
+    
     self.complete = function (data) {
         self.Id(data.Id);
         self.WorkoutId(data.WorkoutId);
@@ -62,6 +67,8 @@
         self.Date(data.Date);
         self.Status(1);
         self.UserId(data.UserId);
+        self.Active(data.Active);
+        self.WorkoutName(data.WorkoutName);
         var url = '/WorkoutInstance/RefreshExercisesForDetails';
         $.ajax(url, {
             type: "get",
@@ -84,6 +91,7 @@
         self.Date(null);
         self.Status(null);
         self.UserId(null);
+        self.Active(null);
     };
     self.save = function () {
         var url = '/WorkoutInstance/SaveInstanceWithExercises';
@@ -93,6 +101,7 @@
             Date: self.Date(),
             Status: self.Status(),
             UserId: self.UserId(),
+            Active: self.Active(),
             Workout: null
         }
         var vIExercises = self.WorkoutInstanceExercises();
@@ -119,12 +128,22 @@
 
     };
     
-
+    self.deleteWindow = function (data) {
+        self.Id(data.Id);
+        self.WorkoutId(data.WorkoutId);
+        self.Name(data.Name);
+        self.Date(data.Date);
+        self.Status(data.Status);
+        self.UserId(data.UserId);
+        self.Active(data.Active)
+    };
     
-    self.delete = function (data) {
+    self.delete2 = function (data) {
+        if (data == undefined)
+            return;
         var url = '/WorkoutInstance/Delete';
         var food = JSON.stringify({
-            id: data.Id
+            id: data.Id()
         });
         $.ajax(url, {
             type: "post",

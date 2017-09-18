@@ -20,16 +20,21 @@ namespace FitnessPro.Services
                 if (oldWorkoutInstance == null)
                 {
                     workoutInstance.Id = Guid.NewGuid().ToString();
+                    workoutInstance.Active = true;
                     ctx.WorkoutInstances.Add(workoutInstance);
                 }
                 else
                 {
                     oldWorkoutInstance.WorkoutId = workoutInstance.WorkoutId;
                     if (workoutInstance.Status == Entities.Enums.StatusType.Planned) {
-                        oldWorkoutInstance.Date = workoutInstance.Date;
+                        if (workoutInstance.Date != DateTime.MinValue)
+                        {
+                            oldWorkoutInstance.Date = workoutInstance.Date;
+                        }
                     };
                     oldWorkoutInstance.Status = workoutInstance.Status;
                     oldWorkoutInstance.UserId = workoutInstance.UserId;
+                    oldWorkoutInstance.Active = workoutInstance.Active;
                 }
 
                 foreach (var wIE in workoutInstanceExercises)
@@ -43,13 +48,8 @@ namespace FitnessPro.Services
                     }
                     else
                     {
-                        oldWorkoutInstanceExercise.WorkoutInstanceId = oldWorkoutInstance.Id;
-                        oldWorkoutInstanceExercise.Id = wIE.Id;
-                        oldWorkoutInstanceExercise.ExerciseName = wIE.ExerciseName;
-                        oldWorkoutInstanceExercise.ExerciseId = wIE.ExerciseId;
                         oldWorkoutInstanceExercise.PlannedRepetitions = wIE.PlannedRepetitions;
                         oldWorkoutInstanceExercise.ActualRepetitions = wIE.ActualRepetitions;
-                       
                     }
                 }
                 
@@ -70,8 +70,12 @@ namespace FitnessPro.Services
                 if (workoutInstance != null)
                 {
                     var wIExercises = ctx.WorkoutInstanceExercises.Where(wie => wie.WorkoutInstanceId == workoutInstance.Id);
-                    ctx.WorkoutInstanceExercises.RemoveRange(wIExercises);
-                    ctx.WorkoutInstances.Remove(workoutInstance);
+                    foreach (var wIE in wIExercises) {
+                        wIE.Active = false;
+                    };
+                    workoutInstance.Active = false;
+                    //ctx.WorkoutInstanceExercises.RemoveRange(wIExercises);
+                    //ctx.WorkoutInstances.Remove(workoutInstance);
                     ctx.SaveChanges();
                     return SuccessMessage;
                 }
