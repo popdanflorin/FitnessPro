@@ -15,6 +15,7 @@ namespace FitnessPro.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public int Repetitions { get; set; }
+        public Boolean ActiveEx { get; set; }
         //def contrangere de tip foreignkey 
         [ForeignKey("WorkoutId")]
         [ScriptIgnore]

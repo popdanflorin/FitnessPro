@@ -31,6 +31,7 @@ namespace FitnessPro.Models
         public DbSet<WorkoutInstance> WorkoutInstances { get; set; }
         public DbSet<WorkoutInstanceExercise> WorkoutInstanceExercises { get; set; }
         public DbSet<UserPerformance> UserPerformance { get; set; }
+        public DbSet<Log> Log { get; set; }
 
         public static ApplicationDbContext Create()
         {

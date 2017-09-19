@@ -194,10 +194,13 @@
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\WorkoutController.cs" />
     <Compile Include="Controllers\WorkoutInstanceController.cs" />
+    <Compile Include="Entities\Enums\Entity.cs" />
+    <Compile Include="Entities\Enums\Operations.cs" />
     <Compile Include="Entities\Enums\StatusType.cs" />
+    <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\UserPerformance.cs" />
     <Compile Include="Entities\WorkoutInstance.cs" />
-    <Compile Include="Entities\Enums\EnumExtensions.cs" />
+    <Compile Include="Entities\Enums\EnumExtentions.cs" />
     <Compile Include="Entities\Enums\EnumItem.cs" />
     <Compile Include="Entities\Enums\WorkoutType.cs" />
     <Compile Include="Entities\Workout.cs" />
@@ -291,6 +294,7 @@
     <Content Include="Views\Workout\Newexercise.cshtml" />
     <Content Include="Views\WorkoutInstance\Item4.cshtml" />
     <Content Include="Views\Workout\Item2.cshtml" />
+    <Content Include="Views\Workout\Item3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

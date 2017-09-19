@@ -12,6 +12,7 @@ namespace FitnessPro.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public WorkoutType Type { get; set; }
+        public Boolean Active { get; set; }
         public string TypeDisplay
         {
             get

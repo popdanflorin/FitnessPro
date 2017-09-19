@@ -25,12 +25,16 @@
                 <td class="col-xs-1">
                     <input type="button" value="Exercises" class="btn btn-info" data-toggle="modal" data-target="#workoutItem1" data-bind="click:$parent.getExercises" />
                 </td>
+                <td class="col-xs-1">
+                    <input type="button" value="Log" class="btn btn-info" data-toggle="modal" data-target="#Item3" data-bind="click:$parent.getEntityDetails" />
+                </td>
               
             </tr>
         </tbody>
     </table>
     @Html.Partial("Item")
     @Html.Partial("Exercises")
+    @Html.Partial("Item3")
 </div>
 <script>
     $(function () {
