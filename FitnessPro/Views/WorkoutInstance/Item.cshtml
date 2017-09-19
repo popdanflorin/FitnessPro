@@ -12,6 +12,8 @@
                 <select id="WorkoutName" class="form-control" data-bind="options:Workouts, optionsText: 'Name', optionsValue: 'Id', value: Workout, optionsCaption: 'Choose...', event:{ change:changeWorkout}"></select>
                 <label for="Date">Date</label>
                 <input id="Date" type="date" class="form-control" data-bind="value: Date">
+                <label for="Rounds">Rounds</label>
+                <input type="number" class="form-control" data-bind="value: Rounds"/>
                 <table class="table">
                     <thead>
                         <tr>
@@ -24,7 +26,7 @@
                     <tbody data-bind="foreach:WorkoutInstanceExercises">
                         <tr>
                             <td class="col-xs-5" data-bind="text:ExerciseName"></td>
-                            <td><input  type="number "class="form-control" data-bind="value: PlannedRepetitions"</td>
+                            <td><input  type="number"class="form-control" data-bind="value: PlannedRepetitions"/></td>
                         </tr>
                     </tbody>
                 </table>

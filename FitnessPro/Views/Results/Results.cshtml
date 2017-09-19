@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Results";
+}
+
+
+<div id="Results">
+    <h2>User Performance</h2>
+    <p>User Name:</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>WorkoutName</th>
+                <th>Data</th>
+                <th>Percentage</th>
+                <th>Points</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:CompletedWorkoutInstances">
+            <tr>
+                <td class="col-xs-5" data-bind="text:WorkoutName"></td>
+                <td class="col-xs-5" data-bind="text:moment(Date).format('LL')"></td>
+                <td class="col-xs-5" data-bind="text:Percentage"> %</td>
+                <td class="col-xs-5" data-bind="text:Points"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(function () {
+        var vm = new Result();
+        vm.refresh();
+        ko.applyBindings(vm, $("#CompletedWorkoutInstances").get(0));
+    });
+</script>
+
