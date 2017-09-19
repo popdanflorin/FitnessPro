@@ -6,6 +6,7 @@
     self.Id = ko.observable();
     self.Name = ko.observable();
     self.Description = ko.observable();
+    self.Active = ko.observable();
     self.Type = ko.observable();
    
     //Workout Exercises
@@ -15,12 +16,14 @@
     self.ExDescription = ko.observable();
     self.ExWorkoutId = ko.observable();
     self.Repetitions = ko.observable();
+    self.ActiveEx = ko.observable();
 
     //Functions for Workout
     self.details = function (data) {
         self.Id(data.Id);
         self.Name(data.Name);
         self.Description(data.Description);
+        self.Active(data.Active);
         self.Type(data.Type);
     };
 
@@ -28,6 +31,7 @@
         self.Id(null);
         self.Name(null);
         self.Description(null);
+        self.Active(null);
         self.Type(null);
     };
     
@@ -37,7 +41,9 @@
             Id: self.Id(),
             Name: self.Name(),
             Description: self.Description(),
+            Active: self.Active(),
             Type: self.Type()
+            
         });
         $.ajax(url, {
             type: "post",
@@ -98,6 +104,7 @@
         self.ExName(null);
         self.ExDescription(null);
         self.Repetitions(null);
+        self.ActiveEx(null);
     }
 
     self.getExDetails = function (data) {
@@ -106,6 +113,7 @@
         self.ExName(data.Name);
         self.ExDescription(data.Description);
         self.Repetitions(data.Repetitions);
+        self.ActiveEx(data.ActiveEx);
     }
 
     self.getExercises = function (data) {
@@ -136,6 +144,7 @@
             Name: self.ExName(),
             Description: self.ExDescription(),
             Repetitions: self.Repetitions(),
+            ActiveEx: self.ActiveEx(),
         });
         $.ajax(url, {
             type: "post",
@@ -203,5 +212,7 @@
         self.Exercises(data.Exercises);
         
     }
-    
+    self.getEntityDetails = function () {
+       
+    }
 }

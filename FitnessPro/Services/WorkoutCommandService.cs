@@ -13,6 +13,7 @@ namespace FitnessPro.Services
         private const string SuccessMessage = "Action sucessfully performed.";
         private const string ErrorMessage = "An application exception occured performing action.";
         private const string ItemNotFoundMessage = "The item was not found.";
+        private const string AddWorkoutMessage = "you can't add a workout if you dont add a name ,a description and a type.";
         public string SaveWorkout(Workout workout)
         {
             try
@@ -21,13 +22,22 @@ namespace FitnessPro.Services
                 if (oldWorkout == null)
                 {
                     workout.Id = Guid.NewGuid().ToString();
+                    workout.Active = true;
                     ctx.Workouts.Add(workout);
+
                 }
                 else
                 {
-                    oldWorkout.Name = workout.Name;
-                    oldWorkout.Description = workout.Description;
-                    oldWorkout.Type = workout.Type;
+                    if (workout.Name != null || workout.Description != null)
+                    {
+                        oldWorkout.Name = workout.Name;
+                        oldWorkout.Description = workout.Description;
+                        oldWorkout.Type = workout.Type;
+                    }
+                    else
+                    {
+                        return AddWorkoutMessage;
+                    }
                 }
 
                 ctx.SaveChanges();
@@ -47,8 +57,9 @@ namespace FitnessPro.Services
                 if (workout != null)
                 {
                     var exercises = ctx.WorkoutExercises.Where(we => we.WorkoutId == workout.Id);
-                    ctx.WorkoutExercises.RemoveRange(exercises);
-                    ctx.Workouts.Remove(workout);
+                    workout.Active = false;
+                    //ctx.WorkoutExercises.RemoveRange(exercises);
+                    //ctx.Workouts.Remove(workout);
                     ctx.SaveChanges();
                     return SuccessMessage;
                 }
@@ -68,6 +79,7 @@ namespace FitnessPro.Services
                 if (oldexercise == null)
                 {
                     exercise.Id = Guid.NewGuid().ToString();
+                    exercise.ActiveEx = true;
                     ctx.WorkoutExercises.Add(exercise);
                 }
                 else
@@ -93,7 +105,8 @@ namespace FitnessPro.Services
                 var exercise = ctx.WorkoutExercises.FirstOrDefault(f => f.Id == id);
                 if (exercise != null)
                 {
-                    ctx.WorkoutExercises.Remove(exercise);
+                    //ctx.WorkoutExercises.Remove(exercise);
+                    exercise.ActiveEx = false;
                     ctx.SaveChanges();
                     return SuccessMessage;
                 }
