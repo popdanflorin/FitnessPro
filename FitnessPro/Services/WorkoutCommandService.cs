@@ -14,20 +14,27 @@ namespace FitnessPro.Services
         private const string ErrorMessage = "An application exception occured performing action.";
         private const string ItemNotFoundMessage = "The item was not found.";
         private const string AddWorkoutMessage = "You can't add a workout if you dont add a name .";
+        private const string AddOperation = "Add";
         public string SaveWorkout(Workout workout)
         {
             try
             {
                 var oldWorkout = ctx.Workouts.FirstOrDefault(f => f.Id == workout.Id);
                 if (oldWorkout == null)
-                {
+                {//add
                     workout.Id = Guid.NewGuid().ToString();
+                    //log.LogId = Guid.NewGuid().ToString();
+                    //log.PrimaryEntityId = workout.Id;
+                    //log.LogDate.Now.ToString("M/d/yyyy");
+
                     workout.Active = true;
                     ctx.Workouts.Add(workout);
+                    
+                    
 
                 }
                 else
-                {
+                {//modify
                     if (workout.Name != null || workout.Description != null)
                     {
                         oldWorkout.Name = workout.Name;
