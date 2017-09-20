@@ -13,7 +13,7 @@ namespace FitnessPro.Services
         private const string SuccessMessage = "Action sucessfully performed.";
         private const string ErrorMessage = "An application exception occured performing action.";
         private const string ItemNotFoundMessage = "The item was not found.";
-        private const string AddWorkoutMessage = "you can't add a workout if you dont add a name ,a description and a type.";
+        private const string AddWorkoutMessage = "You can't add a workout if you dont add a name .";
         public string SaveWorkout(Workout workout)
         {
             try
