@@ -18,6 +18,18 @@
     self.Repetitions = ko.observable();
     self.ActiveEx = ko.observable();
 
+    //Log
+    //self.LogId = ko.observable();
+    self.Entity = ko.observable();
+    self.PrimaryEntityId = ko.observable();
+    self.SecondaryEntityId = ko.observable();
+    self.LogDate = ko.observable();
+    self.Operation = ko.observable();
+    self.Property = ko.observable();
+    self.OldValue = ko.observable();
+    self.NewValue = ko.observable();
+
+
     //Functions for Workout
     self.details = function (data) {
         self.Id(data.Id);
@@ -42,7 +54,16 @@
             Name: self.Name(),
             Description: self.Description(),
             Active: self.Active(),
-            Type: self.Type()
+            Type: self.Type(),
+            //pentru Log
+            Entity: Workout,
+            PrimaryEntityId: self.Id(),
+            LogDate: self.LogDate(),
+            Operation: Add,
+            Property: self.Property(),
+            OldValue: self.LogDate(),
+            NewValue: self.NewValue()
+            //
             
         });
         $.ajax(url, {
@@ -52,6 +73,7 @@
             data: workout,
             success: function (data) {
                 console.log(data);
+           
                 self.refresh();
             },
             error: function (jqXHR, textStatus, errorThrown) {
