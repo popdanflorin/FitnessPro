@@ -249,6 +249,7 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ViewModels\Result.js" />
     <Content Include="Scripts\ViewModels\WorkoutInstance.js" />
     <Content Include="Scripts\ViewModels\Workout.js" />
     <Content Include="Web.config" />
@@ -286,7 +287,7 @@
     <Content Include="Views\Workout\List.cshtml" />
     <Content Include="Views\Workout\Item.cshtml" />
     <Content Include="Views\WorkoutInstance\List.cshtml" />
-    <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\Results\Results.cshtml" />
     <Content Include="Views\WorkoutInstance\Item.cshtml" />
     <Content Include="Views\WorkoutInstance\Item2.cshtml" />
     <Content Include="Views\WorkoutInstance\Item3.cshtml" />
@@ -294,6 +295,7 @@
     <Content Include="Views\Workout\Newexercise.cshtml" />
     <Content Include="Views\WorkoutInstance\Item4.cshtml" />
     <Content Include="Views\Workout\Item2.cshtml" />
+    <Content Include="Views\WorkoutInstance\Item2Completed.cshtml" />
     <Content Include="Views\Workout\Item3.cshtml" />
   </ItemGroup>
   <ItemGroup>

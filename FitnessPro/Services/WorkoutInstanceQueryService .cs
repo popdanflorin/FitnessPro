@@ -29,6 +29,11 @@ namespace FitnessPro.Services
             return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Active == true).ToList();
         }
 
+        public List<WorkoutInstance> GetCompletedWorkoutInstances() {
+            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Active == true).ToList();
+            //return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Status.Equals("Completed")).ToList();
+        }
+
         public List<WorkoutInstanceExercise> GetWorkoutInstanceExercises(string workoutInstanceId) {
             var exercises = ctx.WorkoutExercises.ToList();
             //var exercises = ctx.WorkoutExercises.Where(we => we.Active == true).ToList(); 

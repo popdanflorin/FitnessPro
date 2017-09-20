@@ -15,6 +15,9 @@ namespace FitnessPro.Entities
         public StatusType Status { get; set; }
         public string UserId { get; set; }
         public Boolean Active { get; set; }
+        public int Rounds { get; set; }
+        public double Percentage { get; set;  }
+        public double Points { get; set; }
         public string StatusDisplay
         {
             get {

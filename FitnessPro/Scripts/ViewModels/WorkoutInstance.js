@@ -12,7 +12,7 @@
     self.UserId = ko.observable();
     self.Active = ko.observable();
     self.WorkoutName = ko.observable();
-   
+    self.Rounds = ko.observable();
 
     self.changeWorkout = function (data) {
         if (data == undefined)
@@ -44,6 +44,7 @@
         self.UserId(data.UserId);
         self.Active(data.Active);
         self.WorkoutName(data.WorkoutName);
+        self.Rounds(data.Rounds);
         var url = '/WorkoutInstance/RefreshExercisesForDetails';
         $.ajax(url, {
             type: "get",
@@ -69,6 +70,7 @@
         self.UserId(data.UserId);
         self.Active(data.Active);
         self.WorkoutName(data.WorkoutName);
+        self.Rounds(data.Rounds);
         var url = '/WorkoutInstance/RefreshExercisesForDetails';
         $.ajax(url, {
             type: "get",
@@ -92,6 +94,8 @@
         self.Status(null);
         self.UserId(null);
         self.Active(null);
+        self.Rounds(null);
+        self.WorkoutName(null);
     };
     self.save = function () {
         var url = '/WorkoutInstance/SaveInstanceWithExercises';
@@ -102,6 +106,8 @@
             Status: self.Status(),
             UserId: self.UserId(),
             Active: self.Active(),
+            Rounds: self.Rounds(),
+            WorkoutName: self.WorkoutName(),
             Workout: null
         }
         var vIExercises = self.WorkoutInstanceExercises();
@@ -135,7 +141,8 @@
         self.Date(data.Date);
         self.Status(data.Status);
         self.UserId(data.UserId);
-        self.Active(data.Active)
+        self.Active(data.Active);
+        self.Rounds(data.Rounds)
     };
     
     self.delete2 = function (data) {

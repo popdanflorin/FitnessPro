@@ -35,8 +35,12 @@ namespace FitnessPro.Services
                     oldWorkoutInstance.Status = workoutInstance.Status;
                     oldWorkoutInstance.UserId = workoutInstance.UserId;
                     oldWorkoutInstance.Active = workoutInstance.Active;
+                    oldWorkoutInstance.Rounds = workoutInstance.Rounds;
+                    
                 }
-
+                
+                var TotalSum = 0.0;
+                var numberOfExercises = 0;
                 foreach (var wIE in workoutInstanceExercises)
                 {
                     var oldWorkoutInstanceExercise = ctx.WorkoutInstanceExercises.FirstOrDefault(f => f.Id == wIE.Id);
@@ -50,10 +54,33 @@ namespace FitnessPro.Services
                     {
                         oldWorkoutInstanceExercise.PlannedRepetitions = wIE.PlannedRepetitions;
                         oldWorkoutInstanceExercise.ActualRepetitions = wIE.ActualRepetitions;
+                        if (oldWorkoutInstance.Status.Equals("Completed"))
+                        {
+                            numberOfExercises++;
+                            TotalSum =TotalSum + ((oldWorkoutInstanceExercise.ActualRepetitions * 100) / oldWorkoutInstanceExercise.PlannedRepetitions);
+                    }
                     }
                 }
-                
-                ctx.SaveChanges();
+                if (oldWorkoutInstance.Status.Equals("Completed"))
+                {
+                    oldWorkoutInstance.Percentage = TotalSum / numberOfExercises;
+                    if (oldWorkoutInstance.Percentage < 100.00)
+                        oldWorkoutInstance.Points = oldWorkoutInstance.Percentage / 10;
+                    else
+                    {
+                        if (oldWorkoutInstance.Percentage < 150.00) oldWorkoutInstance.Points = 15;   //10+5
+                        else
+                          if (oldWorkoutInstance.Percentage < 200.00) oldWorkoutInstance.Points = 20; //10+10
+                        else oldWorkoutInstance.Points = 30; //10+20
+                    }
+
+                }
+
+
+
+
+
+                 ctx.SaveChanges();
                 return SuccessMessage;
             }
             catch (Exception ex)
