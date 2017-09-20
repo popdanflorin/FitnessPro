@@ -95,6 +95,7 @@
         self.UserId(null);
         self.Active(null);
         self.Rounds(null);
+        self.WorkoutName(null);
     };
     self.save = function () {
         var url = '/WorkoutInstance/SaveInstanceWithExercises';
@@ -106,6 +107,7 @@
             UserId: self.UserId(),
             Active: self.Active(),
             Rounds: self.Rounds(),
+            WorkoutName: self.WorkoutName(),
             Workout: null
         }
         var vIExercises = self.WorkoutInstanceExercises();

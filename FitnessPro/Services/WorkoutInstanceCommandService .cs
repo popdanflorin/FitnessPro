@@ -80,7 +80,7 @@ namespace FitnessPro.Services
 
 
 
-                    ctx.SaveChanges();
+                 ctx.SaveChanges();
                 return SuccessMessage;
             }
             catch (Exception ex)
