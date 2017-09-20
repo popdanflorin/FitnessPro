@@ -23,9 +23,10 @@ namespace FitnessPro.Migrations
             //
             context.Workouts.AddOrUpdate(
               p => p.Name,
-              new Workout { Id = Guid.NewGuid().ToString(), Name = "Six-pack in six weeks", Description = "All you need to get ripped is three workouts and an iron will.", Type = WorkoutType.Abs },
-              new Workout { Id = Guid.NewGuid().ToString(), Name = "High intensity chest-to-legs circuit", Description = "Take advantage of just one piece of equipment—a medicine ball—and your own bodyweight to get a muscle burn from your pecs all the way down to your quads.", Type = WorkoutType.Chest },
-              new Workout { Id = Guid.NewGuid().ToString(), Name = "The pullup-pushup workout routine", Description = "Lock down a great upper body with the only two exercises you really needs.", Type = WorkoutType.Chest }
+              new Workout { Id = Guid.NewGuid().ToString(), Name = "Six-pack in six weeks", Description = "All you need to get ripped is three workouts and an iron will.", Type = WorkoutType.Abs, Active = true },
+              new Workout { Id = Guid.NewGuid().ToString(), Name = "High intensity chest-to-legs circuit", Description = "Take advantage of just one piece of equipment—a medicine ball—and your own bodyweight to get a muscle burn from your pecs all the way down to your quads.", Type = WorkoutType.Chest, Active = true },
+              new Workout { Id = Guid.NewGuid().ToString(), Name = "The pullup-pushup workout routine", Description = "Lock down a great upper body with the only two exercises you really needs.", Type = WorkoutType.Chest, Active = true }
+
             );
         }
     }

@@ -40,6 +40,7 @@ namespace FitnessPro.Controllers
         [HttpPost]
         public JsonResult SaveInstanceWithExercises(WorkoutInstance workoutInstance, List<WorkoutInstanceExercise> vIExercises)
         {
+            //, User.Identity.Name
             var message = cService.SaveWorkoutInstanceWithExercises(workoutInstance, vIExercises);
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
