@@ -13,7 +13,7 @@ namespace FitnessPro.Services
         private const string SuccessMessage = "Action sucessfully performed.";
         private const string ErrorMessage = "An application exception occured performing action.";
         private const string ItemNotFoundMessage = "The item was not found.";
-        public string SaveWorkoutInstanceWithExercises(WorkoutInstance workoutInstance, List<WorkoutInstanceExercise> workoutInstanceExercises) //, string userName
+        public string SaveWorkoutInstanceWithExercises(WorkoutInstance workoutInstance, List<WorkoutInstanceExercise> workoutInstanceExercises , string UserName) //, string userName
         {
             try
             {
@@ -22,7 +22,7 @@ namespace FitnessPro.Services
                 {
                     workoutInstance.Id = Guid.NewGuid().ToString();
                     workoutInstance.Active = true;
-                    //workoutInstance.UserId = userName;
+                    workoutInstance.UserId = UserName;
                     ctx.WorkoutInstances.Add(workoutInstance);
                 }
                 else
@@ -84,13 +84,6 @@ namespace FitnessPro.Services
             {
                 return ErrorMessage;
             }
-        }
-        public string GetUserId() {
-            return usr.Id;
-        }
-        public string GetUsername()
-        {
-            return usr.UserName;
         }
         public double GetTotalPercentage(List<WorkoutInstance> CompletedWorkoutInstances) {
             var totalPercentageSum = 0.0;

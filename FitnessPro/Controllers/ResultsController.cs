@@ -16,11 +16,11 @@ namespace FitnessPro.Controllers
         }
         public JsonResult ListRefresh()
         {
-            var CompletedWorkoutInstances = qService.GetCompletedWorkoutInstances();
+            var CompletedWorkoutInstances = qService.GetCompletedWorkoutInstances(User.Identity.Name);
             var TotalPercentage = cService.GetTotalPercentage(CompletedWorkoutInstances);
             var TotalPoints = cService.GetTotalPoints(CompletedWorkoutInstances);
-            
-            return new JsonResult() { Data = new { CompletedWorkoutInstances = CompletedWorkoutInstances , TotalPercentage = TotalPercentage, TotalPoints = TotalPoints, UserName = User.Identity.Name }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            var UserName = User.Identity.Name;
+            return new JsonResult() { Data = new { CompletedWorkoutInstances = CompletedWorkoutInstances , TotalPercentage = TotalPercentage, TotalPoints = TotalPoints, UserName = UserName }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
 }

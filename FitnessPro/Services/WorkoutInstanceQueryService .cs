@@ -20,11 +20,11 @@ namespace FitnessPro.Services
         {
             return ctx.WorkoutExercises.Where(wie => wie.ActiveEx == true).ToList(); 
         }
-        public List<WorkoutInstance> GetWorkoutInstances() {
-            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Active == true).ToList();
+        public List<WorkoutInstance> GetWorkoutInstances(string UserName) {
+            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Active == true && wie.UserId == UserName ).ToList();
         }
-        public List<WorkoutInstance> GetCompletedWorkoutInstances() {
-            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Status == Entities.Enums.StatusType.Completed).ToList();
+        public List<WorkoutInstance> GetCompletedWorkoutInstances(string UserName) {
+            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Status == Entities.Enums.StatusType.Completed && wie.UserId == UserName).ToList();
         }
         public List<WorkoutInstanceExercise> GetWorkoutInstanceExercises(string workoutInstanceId) {
             var exercises = ctx.WorkoutExercises.ToList();
