@@ -21,7 +21,7 @@ namespace FitnessPro.Controllers
         public JsonResult ListRefresh()
         {
             var workouts = WqService.GetWorkouts();
-            var workoutInstanes = qService.GetWorkoutInstances();
+            var workoutInstanes = qService.GetWorkoutInstances(User.Identity.Name);
             return new JsonResult() { Data = new { Workouts = workouts, WorkoutInstances = workoutInstanes }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
@@ -40,7 +40,8 @@ namespace FitnessPro.Controllers
         [HttpPost]
         public JsonResult SaveInstanceWithExercises(WorkoutInstance workoutInstance, List<WorkoutInstanceExercise> vIExercises)
         {
-            var message = cService.SaveWorkoutInstanceWithExercises(workoutInstance, vIExercises);
+            //, User.Identity.Name
+            var message = cService.SaveWorkoutInstanceWithExercises(workoutInstance, vIExercises , User.Identity.Name);
             return new JsonResult() { Data = message, ContentEncoding = Encoding.UTF8 };
         }
 

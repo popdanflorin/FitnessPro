@@ -9,9 +9,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Data</th>
-                <th>Status</th>
+                <th style="font-size:20px;">Name</th>
+                <th style="font-size:20px;">Data</th>
+                <th style="font-size:20px;">Status</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -35,10 +35,10 @@
         </tbody>
     </table>
     @Html.Partial("Item")
-    @Html.Partial("Item2")
-    @Html.Partial("Item2Completed")
-    @Html.Partial("Item3")
-    @Html.Partial("Item4")
+    @Html.Partial("Details")
+    @Html.Partial("DetailsCompleted")
+    @Html.Partial("Complete")
+    @Html.Partial("DeleteWarning")
 </div>
 <script>
     $(function () {

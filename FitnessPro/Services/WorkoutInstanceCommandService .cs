@@ -9,10 +9,11 @@ namespace FitnessPro.Services
     public class WorkoutInstanceCommandService
     {
         private ApplicationDbContext ctx = new ApplicationDbContext();
+        private ApplicationUser usr = new ApplicationUser();
         private const string SuccessMessage = "Action sucessfully performed.";
         private const string ErrorMessage = "An application exception occured performing action.";
         private const string ItemNotFoundMessage = "The item was not found.";
-        public string SaveWorkoutInstanceWithExercises(WorkoutInstance workoutInstance, List<WorkoutInstanceExercise> workoutInstanceExercises)
+        public string SaveWorkoutInstanceWithExercises(WorkoutInstance workoutInstance, List<WorkoutInstanceExercise> workoutInstanceExercises , string UserName) //, string userName
         {
             try
             {
@@ -21,6 +22,7 @@ namespace FitnessPro.Services
                 {
                     workoutInstance.Id = Guid.NewGuid().ToString();
                     workoutInstance.Active = true;
+                    workoutInstance.UserId = UserName;
                     ctx.WorkoutInstances.Add(workoutInstance);
                 }
                 else
@@ -54,32 +56,27 @@ namespace FitnessPro.Services
                     {
                         oldWorkoutInstanceExercise.PlannedRepetitions = wIE.PlannedRepetitions;
                         oldWorkoutInstanceExercise.ActualRepetitions = wIE.ActualRepetitions;
-                        if (oldWorkoutInstance.Status.Equals("Completed"))
+                        if (oldWorkoutInstance.Status == Entities.Enums.StatusType.Completed)
                         {
                             numberOfExercises++;
                             TotalSum =TotalSum + ((oldWorkoutInstanceExercise.ActualRepetitions * 100) / oldWorkoutInstanceExercise.PlannedRepetitions);
-                    }
+                         }
                     }
                 }
-                if (oldWorkoutInstance.Status.Equals("Completed"))
+                if (oldWorkoutInstance != null && oldWorkoutInstance.Status == Entities.Enums.StatusType.Completed)
                 {
                     oldWorkoutInstance.Percentage = TotalSum / numberOfExercises;
-                    if (oldWorkoutInstance.Percentage < 100.00)
+                    if (oldWorkoutInstance.Percentage <= 100.00)
                         oldWorkoutInstance.Points = oldWorkoutInstance.Percentage / 10;
                     else
                     {
-                        if (oldWorkoutInstance.Percentage < 150.00) oldWorkoutInstance.Points = 15;   //10+5
+                        if (oldWorkoutInstance.Percentage <= 150.00) oldWorkoutInstance.Points = 15;   //10+5
                         else
-                          if (oldWorkoutInstance.Percentage < 200.00) oldWorkoutInstance.Points = 20; //10+10
+                          if (oldWorkoutInstance.Percentage <= 200.00) oldWorkoutInstance.Points = 20; //10+10
                         else oldWorkoutInstance.Points = 30; //10+20
                     }
 
                 }
-
-
-
-
-
                  ctx.SaveChanges();
                 return SuccessMessage;
             }
@@ -87,6 +84,22 @@ namespace FitnessPro.Services
             {
                 return ErrorMessage;
             }
+        }
+        public double GetTotalPercentage(List<WorkoutInstance> CompletedWorkoutInstances) {
+            var totalPercentageSum = 0.0;
+            foreach (var cWI in CompletedWorkoutInstances) {
+                totalPercentageSum += cWI.Percentage;
+            }
+            return (totalPercentageSum / CompletedWorkoutInstances.Count);
+        }
+        public double GetTotalPoints(List<WorkoutInstance> CompletedWorkoutInstances)
+        {
+            var totalPoints = 0.0;
+            foreach (var cWI in CompletedWorkoutInstances)
+            {
+                totalPoints += cWI.Points;
+            }
+            return totalPoints;
         }
 
         public string DeleteWorkoutInstance(string id)

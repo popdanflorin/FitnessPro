@@ -223,6 +223,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\planworkout.jpg" />
+    <Content Include="Content\result.jpg" />
+    <Content Include="Content\sticktoyuortraining.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -289,13 +292,13 @@
     <Content Include="Views\WorkoutInstance\List.cshtml" />
     <Content Include="Views\Results\Results.cshtml" />
     <Content Include="Views\WorkoutInstance\Item.cshtml" />
-    <Content Include="Views\WorkoutInstance\Item2.cshtml" />
-    <Content Include="Views\WorkoutInstance\Item3.cshtml" />
+    <Content Include="Views\WorkoutInstance\Details.cshtml" />
+    <Content Include="Views\WorkoutInstance\Complete.cshtml" />
     <Content Include="Views\Workout\Exercises.cshtml" />
     <Content Include="Views\Workout\Newexercise.cshtml" />
-    <Content Include="Views\WorkoutInstance\Item4.cshtml" />
+    <Content Include="Views\WorkoutInstance\DeleteWarning.cshtml" />
     <Content Include="Views\Workout\Item2.cshtml" />
-    <Content Include="Views\WorkoutInstance\Item2Completed.cshtml" />
+    <Content Include="Views\WorkoutInstance\DetailsCompleted.cshtml" />
     <Content Include="Views\Workout\Item3.cshtml" />
   </ItemGroup>
   <ItemGroup>
