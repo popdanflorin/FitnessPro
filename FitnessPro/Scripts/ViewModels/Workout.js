@@ -19,6 +19,8 @@
     self.ActiveEx = ko.observable();
 
     //Log
+    self.Logs = ko.observableArray();
+    self.LogWorkoutId = ko.observable();
     self.LogId = ko.observable();
     self.Entity = ko.observable();
     self.PrimaryEntityId = ko.observable();
@@ -236,7 +238,22 @@
         self.Exercises(data.Exercises);
         
     }
-    self.getEntityDetails = function () {
-       
+    self.getEntityDetails = function (data) {
+        var url = '/Workout/GetEntityOp';
+        var workoutId = data.Id;
+        $.ajax(url, {
+            type: "get",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: { workoutId: data.Id },
+            success: function (data) {
+                console.log(data);
+                self.Logs(data.Logs);
+                //self.LogWorkoutId(workoutId);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + ': ' + errorThrown);
+            }
+        });
     }
 }

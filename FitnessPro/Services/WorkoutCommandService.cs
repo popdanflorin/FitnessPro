@@ -30,7 +30,7 @@ namespace FitnessPro.Services
                     workout.Id = Guid.NewGuid().ToString();
                     
                     //logdata pentru modify ramane acelasi si la modify(ceea ce am deja salvat modific
-                    log.LogDate = DateTime.Today;
+                    log.LogDate = DateTime.Now;
                     log.Type = Operations.Add;
                   
 
@@ -50,7 +50,7 @@ namespace FitnessPro.Services
                         log.Type = Operations.Modify;
                         log.Property = "Date";
                         log.OldValue = log.LogDate;
-                        log.NewValue = DateTime.Today;
+                        log.NewValue = DateTime.Now;
 
 
 
@@ -62,9 +62,9 @@ namespace FitnessPro.Services
                         return AddWorkoutMessage;
                     }
                 }
-
-                ctx.SaveChanges();
                 ctx.Logs.Add(log);
+                ctx.SaveChanges();
+               
                 return SuccessMessage;
             }
             catch
@@ -86,13 +86,13 @@ namespace FitnessPro.Services
                     log.LogId = Guid.NewGuid().ToString();
                     log.Entity = Entity.Workout;
                     log.PrimaryEntityId = workout.Id;
-                    log.LogDate = DateTime.Today;
+                    log.LogDate = DateTime.Now;
                     log.Type = Operations.Delete;
                     //ctx.WorkoutExercises.RemoveRange(exercises);
                     //ctx.Workouts.Remove(workout);
-                    
-                    ctx.SaveChanges();
                     ctx.Logs.Add(log);
+                    ctx.SaveChanges();
+                   
                     return SuccessMessage;
                 }
                 return ItemNotFoundMessage;
@@ -108,20 +108,33 @@ namespace FitnessPro.Services
             try
             {
                 var oldexercise = ctx.WorkoutExercises.FirstOrDefault(f => f.Id == exercise.Id);
+                var log = new Log();
+                log.LogId = Guid.NewGuid().ToString();
+                log.Entity = Entity.Workout;
+                log.PrimaryEntityId = exercise.WorkoutId;
+                log.SecondaryEntityId = exercise.Id;
                 if (oldexercise == null)
-                {
+                {//add ex
                     exercise.Id = Guid.NewGuid().ToString();
+                    log.LogDate = DateTime.Now;
+                    log.Type = Operations.Add;
                     exercise.ActiveEx = true;
                     ctx.WorkoutExercises.Add(exercise);
                 }
                 else
-                {
+                {//modify es
                     oldexercise.Name = exercise.Name;
                     oldexercise.Description = exercise.Description;
                     oldexercise.Repetitions = exercise.Repetitions;
+                    log.Type = Operations.Modify;
+                    log.Property = "Date";
+                    log.OldValue = log.LogDate;
+                    log.NewValue = DateTime.Now;
                 }
+                ctx.Logs.Add(log);
 
                 ctx.SaveChanges();
+                
                 return SuccessMessage;
             }
             catch
@@ -135,10 +148,18 @@ namespace FitnessPro.Services
             try
             {
                 var exercise = ctx.WorkoutExercises.FirstOrDefault(f => f.Id == id);
+                var log = new Log();
                 if (exercise != null)
                 {
                     //ctx.WorkoutExercises.Remove(exercise);
+                    log.LogId = Guid.NewGuid().ToString();
+                    log.Entity = Entity.Workout;
+                    log.PrimaryEntityId = exercise.WorkoutId;
+                    log.SecondaryEntityId = exercise.Id;
+                    log.LogDate = DateTime.Now;
+                    log.Type = Operations.Delete;
                     exercise.ActiveEx = false;
+                    ctx.Logs.Add(log);
                     ctx.SaveChanges();
                     return SuccessMessage;
                 }
