@@ -12,11 +12,11 @@ namespace FitnessPro.Entities
         public Entity Entity { get; set; }
         public string PrimaryEntityId { get; set; }
         public string SecondaryEntityId { get; set; }
-        public DateTime LogDate { get; set; }
+        public DateTime? LogDate { get; set; }
         public  Operations Type { get; set; }
         public string Property { get; set; }
-        public DateTime OldValue { get; set; }
-        public DateTime NewValue { get; set; }
+        public DateTime? OldValue { get; set; }
+        public DateTime? NewValue { get; set; }
         public string EntitieTypes
         {
             get

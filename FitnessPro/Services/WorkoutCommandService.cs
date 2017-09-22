@@ -24,13 +24,14 @@ namespace FitnessPro.Services
                 var log = new Log();
                 log.LogId = Guid.NewGuid().ToString();
                 log.Entity = Entity.Workout;
-                log.PrimaryEntityId = workout.Id;
+                
                 if (oldWorkout == null)
                 {//add
                     workout.Id = Guid.NewGuid().ToString();
-                    
-                    //logdata pentru modify ramane acelasi si la modify(ceea ce am deja salvat modific
+                    log.PrimaryEntityId = workout.Id;
                     log.LogDate = DateTime.Now;
+                    //logdata pentru modify ramane acelasi si la modify(ceea ce am deja salvat modific
+
                     log.Type = Operations.Add;
                   
 
@@ -47,6 +48,7 @@ namespace FitnessPro.Services
                         oldWorkout.Name = workout.Name;
                         oldWorkout.Description = workout.Description;
                         oldWorkout.Type = workout.Type;
+                        log.PrimaryEntityId = workout.Id;
                         log.Type = Operations.Modify;
                         log.Property = "Date";
                         log.OldValue = log.LogDate;
@@ -67,7 +69,7 @@ namespace FitnessPro.Services
                
                 return SuccessMessage;
             }
-            catch
+            catch (Exception ex)
             {
                 return ErrorMessage;
             }
@@ -110,12 +112,13 @@ namespace FitnessPro.Services
                 var oldexercise = ctx.WorkoutExercises.FirstOrDefault(f => f.Id == exercise.Id);
                 var log = new Log();
                 log.LogId = Guid.NewGuid().ToString();
-                log.Entity = Entity.Workout;
+                log.Entity = Entity.WorkoutExercise;
                 log.PrimaryEntityId = exercise.WorkoutId;
-                log.SecondaryEntityId = exercise.Id;
+                
                 if (oldexercise == null)
                 {//add ex
                     exercise.Id = Guid.NewGuid().ToString();
+                    log.SecondaryEntityId = exercise.Id;
                     log.LogDate = DateTime.Now;
                     log.Type = Operations.Add;
                     exercise.ActiveEx = true;
@@ -153,7 +156,7 @@ namespace FitnessPro.Services
                 {
                     //ctx.WorkoutExercises.Remove(exercise);
                     log.LogId = Guid.NewGuid().ToString();
-                    log.Entity = Entity.Workout;
+                    log.Entity = Entity.WorkoutExercise;
                     log.PrimaryEntityId = exercise.WorkoutId;
                     log.SecondaryEntityId = exercise.Id;
                     log.LogDate = DateTime.Now;
