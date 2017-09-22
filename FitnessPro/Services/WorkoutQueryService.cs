@@ -28,5 +28,11 @@ namespace FitnessPro.Services
         {
             return Enum.GetValues(typeof(WorkoutType)).Cast<WorkoutType>().Select(x => new EnumItem() { Id = (int)x, Description = x.ToString() }).ToList();
         }
+        public List<Log> GetAllOpForWorkout(string workoutid)
+        {
+            return ctx.Logs.Where(x => x.PrimaryEntityId == workoutid).ToList();
+            //active
+        }
+
     }
 }

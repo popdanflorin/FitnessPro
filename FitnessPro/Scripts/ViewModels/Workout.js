@@ -19,7 +19,9 @@
     self.ActiveEx = ko.observable();
 
     //Log
-    //self.LogId = ko.observable();
+    self.Logs = ko.observableArray();
+    self.LogWorkoutId = ko.observable();
+    self.LogId = ko.observable();
     self.Entity = ko.observable();
     self.PrimaryEntityId = ko.observable();
     self.SecondaryEntityId = ko.observable();
@@ -45,6 +47,16 @@
         self.Description(null);
         self.Active(null);
         self.Type(null);
+       /* self.LogId(null);
+        self.Entity(null);
+        self.PrimaryEntityId(null);
+        self.SecondaryEntityId(null);
+        self.LogDate(null);
+        self.Operation(null);
+        self.Property(null);
+        self.OldValue(null);
+        self.NewValue(null);*/
+
     };
     
     self.save = function () {
@@ -55,15 +67,7 @@
             Description: self.Description(),
             Active: self.Active(),
             Type: self.Type(),
-            //pentru Log
-            Entity: Workout,
-            PrimaryEntityId: self.Id(),
-            LogDate: self.LogDate(),
-            Operation: Add,
-            Property: self.Property(),
-            OldValue: self.LogDate(),
-            NewValue: self.NewValue()
-            //
+         
             
         });
         $.ajax(url, {
@@ -234,7 +238,22 @@
         self.Exercises(data.Exercises);
         
     }
-    self.getEntityDetails = function () {
-       
+    self.getEntityDetails = function (data) {
+        var url = '/Workout/GetEntityOp';
+        var workoutId = data.Id;
+        $.ajax(url, {
+            type: "get",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: { workoutId: data.Id },
+            success: function (data) {
+                console.log(data);
+                self.Logs(data.Logs);
+                //self.LogWorkoutId(workoutId);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + ': ' + errorThrown);
+            }
+        });
     }
 }
