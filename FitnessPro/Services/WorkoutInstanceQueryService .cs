@@ -55,5 +55,8 @@ namespace FitnessPro.Services
         {
             return Enum.GetValues(typeof(StatusType)).Cast<StatusType>().Select(x => new EnumItem() { Id = (int)x, Description = x.ToString() }).ToList();
         }
+        public List<Log> GetLogs(string UserName) {
+            return ctx.Logs.Where(wie => wie.UserId == UserName).ToList();
+        }
     }
 }

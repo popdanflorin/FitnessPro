@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Logs";
+}
+
+<div id="Logs">
+    <h2>Log Table for Workout Instances and Workout Instance Exercises</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="font-size:20px;" width="100">Entity</th>
+                <th style="font-size:20px;" width="100">Primary Entity Id</th>
+                <th style="font-size:20px;" width="200">Secondary Entity Id</th>
+                <th style="font-size:20px;" width="100">Log Date</th>
+                <th style="font-size:20px;" width="100">Type</th>
+                <th style="font-size:20px;" width="100">Property</th>
+                <th style="font-size:20px;" width="100">Old Value</th>
+                <th style="font-size:20px;" width="100">New Value</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:Logs">
+            <tr>
+                <td class="col-xs-5" data-bind="text:EntitieTypes"></td>
+                <td class="col-xs-5" data-bind="text:PrimaryEntityId"></td>
+                <td class="col-xs-5" data-bind="text:SecondaryEntityId"></td>
+                <td class="col-xs-5" data-bind="text:moment(LogDate).format('LL')"></td>
+                <td class="col-xs-5" data-bind="text:OperationTypes"></td>
+                <td class="col-xs-5" data-bind="text:Property"></td>
+                <td class="col-xs-5" data-bind="text:OldValue"></td>
+                <td class="col-xs-5" data-bind="text:NewValue"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+    $(function () {
+        var vm = new Log();
+        vm.refresh();
+        ko.applyBindings(vm, $("#Logs").get(0));
+    });
+</script>
+
