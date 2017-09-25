@@ -10,5 +10,6 @@ namespace FitnessPro.Entities.Enums
         Workout,
         WorkoutExercise,
         WorkoutInstance,
+        WorkoutInstanceExercise,
     }
 }
