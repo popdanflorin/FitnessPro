@@ -33,6 +33,7 @@ namespace FitnessPro.Services
             return ctx.Logs.Where(x => x.PrimaryEntityId == workoutid).ToList();
             //active
         }
+      
 
     }
 }

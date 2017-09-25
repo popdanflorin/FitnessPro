@@ -20,5 +20,7 @@ namespace FitnessPro.Entities
                 return Type.ToString();
             }
         }
+
+        public string PrimaryEntityId { get; internal set; }
     }
 }

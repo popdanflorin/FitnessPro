@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace FitnessPro.Services
 {
     public class WorkoutCommandService
@@ -15,6 +16,7 @@ namespace FitnessPro.Services
         private const string ErrorMessage = "An application exception occured performing action.";
         private const string ItemNotFoundMessage = "The item was not found.";
         private const string AddWorkoutMessage = "You can't add a workout if you dont add a name .";
+        private const string DateTimeFormat = "d";
         
         public string SaveWorkout(Workout workout)
         {
@@ -51,8 +53,9 @@ namespace FitnessPro.Services
                         log.PrimaryEntityId = workout.Id;
                         log.Type = Operations.Modify;
                         log.Property = "Date";
-                        log.OldValue = log.LogDate;
-                        log.NewValue = DateTime.Now;
+                        log.OldValue = log.LogDate.ToString(DateTimeFormat);
+                        log.NewValue = DateTime.Now.ToString(DateTimeFormat);
+                        
 
 
 
@@ -112,6 +115,7 @@ namespace FitnessPro.Services
                 var oldexercise = ctx.WorkoutExercises.FirstOrDefault(f => f.Id == exercise.Id);
                 var log = new Log();
                 log.LogId = Guid.NewGuid().ToString();
+                log.LogDate = DateTime.Now;
                 log.Entity = Entity.WorkoutExercise;
                 log.PrimaryEntityId = exercise.WorkoutId;
                 
@@ -119,7 +123,7 @@ namespace FitnessPro.Services
                 {//add ex
                     exercise.Id = Guid.NewGuid().ToString();
                     log.SecondaryEntityId = exercise.Id;
-                    log.LogDate = DateTime.Now;
+                    
                     log.Type = Operations.Add;
                     exercise.ActiveEx = true;
                     ctx.WorkoutExercises.Add(exercise);
@@ -131,8 +135,9 @@ namespace FitnessPro.Services
                     oldexercise.Repetitions = exercise.Repetitions;
                     log.Type = Operations.Modify;
                     log.Property = "Date";
-                    log.OldValue = log.LogDate;
-                    log.NewValue = DateTime.Now;
+                    log.OldValue = log.LogDate.ToString(DateTimeFormat);
+                    log.NewValue = DateTime.Now.ToString(DateTimeFormat);
+                    
                 }
                 ctx.Logs.Add(log);
 
@@ -173,5 +178,6 @@ namespace FitnessPro.Services
                 return ErrorMessage;
             }
         }
+      
     }
 }
