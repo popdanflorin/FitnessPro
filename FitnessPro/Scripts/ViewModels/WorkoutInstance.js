@@ -110,6 +110,7 @@
             WorkoutName: self.WorkoutName(),
             Workout: null
         }
+
         var vIExercises = self.WorkoutInstanceExercises();
         var postData = JSON.stringify(
             {

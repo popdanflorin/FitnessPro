@@ -55,5 +55,23 @@ namespace FitnessPro.Services
         {
             return Enum.GetValues(typeof(StatusType)).Cast<StatusType>().Select(x => new EnumItem() { Id = (int)x, Description = x.ToString() }).ToList();
         }
+        public double GetTotalPercentage(List<WorkoutInstance> CompletedWorkoutInstances)
+        {
+            var totalPercentageSum = 0.0;
+            foreach (var cWI in CompletedWorkoutInstances)
+            {
+                totalPercentageSum += cWI.Percentage;
+            }
+            return (totalPercentageSum / CompletedWorkoutInstances.Count);
+        }
+        public double GetTotalPoints(List<WorkoutInstance> CompletedWorkoutInstances)
+        {
+            var totalPoints = 0.0;
+            foreach (var cWI in CompletedWorkoutInstances)
+            {
+                totalPoints += cWI.Points;
+            }
+            return totalPoints;
+        }
     }
 }
