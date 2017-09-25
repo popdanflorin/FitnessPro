@@ -10,8 +10,7 @@ namespace FitnessPro.Controllers
 {
     public class LogsController : Controller
     {
-        private WorkoutInstanceQueryService qService = new WorkoutInstanceQueryService();
-        private WorkoutInstanceCommandService cService = new WorkoutInstanceCommandService();
+        private LogQueryService qService = new LogQueryService();
         // GET: Log
         public ActionResult Logs()
         {

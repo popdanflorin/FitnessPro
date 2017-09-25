@@ -187,23 +187,7 @@ namespace FitnessPro.Services
                 return ErrorMessage;
             }
         }
-        public double GetTotalPercentage(List<WorkoutInstance> CompletedWorkoutInstances) {
-            var totalPercentageSum = 0.0;
-            foreach (var cWI in CompletedWorkoutInstances) {
-                totalPercentageSum += cWI.Percentage;
-            }
-            return (totalPercentageSum / CompletedWorkoutInstances.Count);
-        }
-        public double GetTotalPoints(List<WorkoutInstance> CompletedWorkoutInstances)
-        {
-            var totalPoints = 0.0;
-            foreach (var cWI in CompletedWorkoutInstances)
-            {
-                totalPoints += cWI.Points;
-            }
-            return totalPoints;
-        }
-
+    
         public string DeleteWorkoutInstance(string id)
         {
             try
