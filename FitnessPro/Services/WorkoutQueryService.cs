@@ -30,7 +30,15 @@ namespace FitnessPro.Services
         }
         public List<Log> GetAllOpForWorkout(string workoutid)
         {
-            return ctx.Logs.Where(x => x.PrimaryEntityId == workoutid).ToList();
+            var logs =  ctx.Logs.Where(x => x.PrimaryEntityId == workoutid).ToList();
+            foreach (var item in logs)
+            {
+             if (item.SecondaryEntityId != null)
+                {
+                    item.ExerciseName = ctx.WorkoutExercises.FirstOrDefault(w => w.Id == item.SecondaryEntityId).Name;
+                }
+            }
+            return logs;
             //active
         }
       

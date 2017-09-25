@@ -11,15 +11,29 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>ExerciseName</th>
+                           
                             <th>Entity</th>
+                            <th>Name</th>
                             <th>LogDate</th>
                             <th>Operation</th>
+                            <th>Property</th>
                             <th>OldValue</th>
                             <th>NewValue</th>
         
                         </tr>
                     </thead>
+                    <tbody data-bind="foreach:Logs">
+                        <tr>
+                            <td class="col-xs-5" data-bind="text:EntitieTypes"></td>
+                            <td class="col-xs-5" data-bind="text:ExerciseName"></td>
+                            <td class="col-xs-5" data-bind="text:moment(LogDate).format('LL') "></td>
+                            <td class="col-xs-5" data-bind="text:OperationTypes"></td>
+                            <td class="col-xs-5" data-bind="text:Property"></td>
+                            <td class="col-xs-5" data-bind="text:OldValue"></td>
+                            <td class="col-xs-5" data-bind="text:NewValue"></td>
+                        </tr>
+
+                    </tbody>
                     </table>
            </div>
             <div class="modal-footer">

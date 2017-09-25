@@ -3,6 +3,7 @@ using FitnessPro.Entities.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FitnessPro.Entities
 {
@@ -31,7 +32,8 @@ namespace FitnessPro.Entities
                 return Type.ToString();
             }
         }
-
+        [NotMapped]
+        public string ExerciseName { get; set;  }
 
 
     }

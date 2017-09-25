@@ -16,66 +16,98 @@ namespace FitnessPro.Services
         private const string ErrorMessage = "An application exception occured performing action.";
         private const string ItemNotFoundMessage = "The item was not found.";
         private const string AddWorkoutMessage = "You can't add a workout if you dont add a name .";
-        private const string DateTimeFormat = "d";
-        
+        private const string DateTimeFormat = "yyyyMMddHHmmss";
+
         public string SaveWorkout(Workout workout)
         {
             try
             {
                 var oldWorkout = ctx.Workouts.FirstOrDefault(f => f.Id == workout.Id);
-                var log = new Log();
-                log.LogId = Guid.NewGuid().ToString();
-                log.Entity = Entity.Workout;
-                
+                var logs = new List<Log>();
+
                 if (oldWorkout == null)
-                {//add
+                {
+                    var log = InitLog();
+                    //add
                     workout.Id = Guid.NewGuid().ToString();
-                    log.PrimaryEntityId = workout.Id;
-                    log.LogDate = DateTime.Now;
-                    //logdata pentru modify ramane acelasi si la modify(ceea ce am deja salvat modific
-
-                    log.Type = Operations.Add;
-                  
-
                     workout.Active = true;
-                    ctx.Workouts.Add(workout);
-                    
-                    
 
+                    log.PrimaryEntityId = workout.Id;
+                    log.Type = Operations.Add;
+                    logs.Add(log);
+
+                    ctx.Workouts.Add(workout);
                 }
                 else
-                {//modify
+                {
+                    //modify
                     if (workout.Name != null || workout.Description != null)
                     {
-                        oldWorkout.Name = workout.Name;
-                        oldWorkout.Description = workout.Description;
-                        oldWorkout.Type = workout.Type;
-                        log.PrimaryEntityId = workout.Id;
-                        log.Type = Operations.Modify;
-                        log.Property = "Date";
-                        log.OldValue = log.LogDate.ToString(DateTimeFormat);
-                        log.NewValue = DateTime.Now.ToString(DateTimeFormat);
-                        
-
-
-
-
-
+                        if (oldWorkout.Name != workout.Name)
+                        {
+                            var log = InitLog();
+                            log.PrimaryEntityId = workout.Id;
+                            log.Type = Operations.Modify;
+                            log.Property = "Name";
+                            log.OldValue = oldWorkout.Name;
+                            log.NewValue = workout.Name;
+                            logs.Add(log);
+                            oldWorkout.Name = workout.Name;
+                        }
+                        if (oldWorkout.Description != workout.Description)
+                        {
+                            var log = InitLog();
+                            log.PrimaryEntityId = workout.Id;
+                            log.Type = Operations.Modify;
+                            log.Property = "Description";
+                            log.OldValue = oldWorkout.Description;
+                            log.NewValue = workout.Description;
+                            logs.Add(log);
+                            oldWorkout.Description = workout.Description;
+                        }
+                        if (oldWorkout.Type != workout.Type)
+                        {
+                            var log = InitLog();
+                            log.PrimaryEntityId = workout.Id;
+                            log.Type = Operations.Modify;
+                            log.Property = "Type";
+                            log.OldValue = oldWorkout.TypeDisplay;
+                            log.NewValue = workout.TypeDisplay;
+                            logs.Add(log);
+                            oldWorkout.Type = workout.Type;
+                        }
                     }
                     else
                     {
                         return AddWorkoutMessage;
                     }
                 }
-                ctx.Logs.Add(log);
+                ctx.Logs.AddRange(logs);
                 ctx.SaveChanges();
-               
+
                 return SuccessMessage;
             }
             catch (Exception ex)
             {
                 return ErrorMessage;
             }
+        }
+
+        private Log InitLog()
+        {
+            var log = new Log();
+            log.LogId = Guid.NewGuid().ToString();
+            log.Entity = Entity.Workout;
+            log.LogDate = DateTime.Now;
+            return log;
+        }
+        private Log InitLogEx()
+        {
+            var log = new Log();
+            log.LogId = Guid.NewGuid().ToString();
+            log.Entity = Entity.WorkoutExercise;
+            log.LogDate = DateTime.Now;
+            return log;
         }
 
         public string DeleteWorkout(string id)
@@ -97,7 +129,7 @@ namespace FitnessPro.Services
                     //ctx.Workouts.Remove(workout);
                     ctx.Logs.Add(log);
                     ctx.SaveChanges();
-                   
+
                     return SuccessMessage;
                 }
                 return ItemNotFoundMessage;
@@ -113,39 +145,78 @@ namespace FitnessPro.Services
             try
             {
                 var oldexercise = ctx.WorkoutExercises.FirstOrDefault(f => f.Id == exercise.Id);
-                var log = new Log();
-                log.LogId = Guid.NewGuid().ToString();
-                log.LogDate = DateTime.Now;
-                log.Entity = Entity.WorkoutExercise;
-                log.PrimaryEntityId = exercise.WorkoutId;
-                
+                var logs = new List<Log>();
+
+               
+
                 if (oldexercise == null)
-                {//add ex
+                {
+                    var log = InitLogEx();
+                    //add
                     exercise.Id = Guid.NewGuid().ToString();
-                    log.SecondaryEntityId = exercise.Id;
-                    
-                    log.Type = Operations.Add;
                     exercise.ActiveEx = true;
+
+                    log.PrimaryEntityId = exercise.WorkoutId;
+                    log.SecondaryEntityId = exercise.Id;
+                    log.Type = Operations.Add;
+                    logs.Add(log);
+
                     ctx.WorkoutExercises.Add(exercise);
                 }
                 else
-                {//modify es
-                    oldexercise.Name = exercise.Name;
-                    oldexercise.Description = exercise.Description;
-                    oldexercise.Repetitions = exercise.Repetitions;
-                    log.Type = Operations.Modify;
-                    log.Property = "Date";
-                    log.OldValue = log.LogDate.ToString(DateTimeFormat);
-                    log.NewValue = DateTime.Now.ToString(DateTimeFormat);
-                    
+                {
+                    //modify
+                    if (exercise.Name != null || exercise.Description != null)
+                    {
+                        if (oldexercise.Name != exercise.Name)
+                        {
+                            var log = InitLogEx();
+                            log.PrimaryEntityId = exercise.WorkoutId;
+                            log.SecondaryEntityId = exercise.Id;
+                            log.Type = Operations.Modify;
+                            log.Property = "Name";
+                            log.OldValue = oldexercise.Name;
+                            log.NewValue = exercise.Name;
+                            logs.Add(log);
+                            oldexercise.Name = exercise.Name;
+                        }
+                        if (oldexercise.Description != exercise.Description)
+                        {
+                            var log = InitLogEx();
+                            log.PrimaryEntityId = exercise.WorkoutId;
+                            log.SecondaryEntityId = exercise.Id;
+                            log.Type = Operations.Modify;
+                            log.Property = "Description";
+                            log.OldValue = oldexercise.Description;
+                            log.NewValue = exercise.Description;
+                            logs.Add(log);
+                            oldexercise.Description = exercise.Description;
+                        }
+                        if (oldexercise.Repetitions != exercise.Repetitions)
+                        {
+                            var log = InitLogEx();
+                            log.PrimaryEntityId = exercise.WorkoutId;
+                            log.SecondaryEntityId = exercise.Id;
+                            log.Type = Operations.Modify;
+                            log.Property = "repetitions";
+                            log.OldValue = oldexercise.Repetitions.ToString();
+                            log.NewValue = exercise.Repetitions.ToString();
+                            logs.Add(log);
+                            oldexercise.Repetitions = exercise.Repetitions;
+                        }
+                    }
+                    else
+                    {
+                        return AddWorkoutMessage;
+                    }
                 }
-                ctx.Logs.Add(log);
+                ctx.Logs.AddRange(logs);
 
                 ctx.SaveChanges();
-                
+
                 return SuccessMessage;
             }
-            catch
+            catch (Exception ex)
             {
                 return ErrorMessage;
             }
@@ -178,6 +249,6 @@ namespace FitnessPro.Services
                 return ErrorMessage;
             }
         }
-      
+
     }
 }

@@ -47,6 +47,7 @@
         self.Description(null);
         self.Active(null);
         self.Type(null);
+
        /* self.LogId(null);
         self.Entity(null);
         self.PrimaryEntityId(null);
@@ -248,7 +249,7 @@
             data: { workoutId: data.Id },
             success: function (data) {
                 console.log(data);
-                self.Logs(data.Logs);
+                self.Logs(data.Operations);
                 //self.LogWorkoutId(workoutId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
