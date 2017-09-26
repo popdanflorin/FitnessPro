@@ -1,7 +1,7 @@
 ﻿
 <div id="workoutItem1" class="modal fade" role="dialog">
   
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         
         <!-- Modal content-->
         <div class="modal-content">
@@ -24,9 +24,11 @@
                         </tr>
                     </thead>
                     <tbody data-bind="foreach:Exercises">
-                        <tr>
+                        <tr white-space:nowrap>
                             <td class="col-xs-5" data-bind="text:Name"></td>
-                            <td class="col-xs-5" data-bind="text:Description"></td>
+                            <td  class="col-xs-5"">
+                              <textarea id="Description" type="text" data-bind="value: Description" readonly></textarea>  
+                            </td>
                             <td class="col-xs-5" data-bind="text:Repetitions"></td>
                             <td class="col-xs-1">
                                 <input type="button" value="Details" class="btn btn-info" data-toggle="modal" data-target="#workoutNewEx" data-bind="click:$parent.getExDetails" />
