@@ -30,6 +30,7 @@ namespace FitnessPro.Migrations
               
 
             );
+            context.SaveChanges();
             context.WorkoutExercises.AddOrUpdate(
                 p => p.Name,
                 //ex for Six-pack in six weeks

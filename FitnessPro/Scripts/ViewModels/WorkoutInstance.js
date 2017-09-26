@@ -15,7 +15,7 @@
     self.Rounds = ko.observable();
 
     self.changeWorkout = function (data) {
-        if (data == undefined)
+        if (data === undefined)
             return;
         var workoutId = $('#WorkoutName').val();
         self.WorkoutId(workoutId);
@@ -147,7 +147,7 @@
     };
     
     self.delete2 = function (data) {
-        if (data == undefined)
+        if (data === undefined)
             return;
         var url = '/WorkoutInstance/Delete';
         var food = JSON.stringify({

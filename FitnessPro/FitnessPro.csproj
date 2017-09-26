@@ -238,6 +238,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -254,10 +255,12 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ViewModels\Diagram.js" />
     <Content Include="Scripts\ViewModels\Log.js" />
     <Content Include="Scripts\ViewModels\Result.js" />
     <Content Include="Scripts\ViewModels\WorkoutInstance.js" />
     <Content Include="Scripts\ViewModels\Workout.js" />
+    <Content Include="Views\Results\index.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -304,6 +307,7 @@
     <Content Include="Views\WorkoutInstance\DetailsCompleted.cshtml" />
     <Content Include="Views\Workout\Item3.cshtml" />
     <Content Include="Views\Logs\Logs.cshtml" />
+    <Content Include="Views\Results\Diagram.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
