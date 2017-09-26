@@ -22,5 +22,11 @@ namespace FitnessPro.Controllers
             var UserName = User.Identity.Name;
             return new JsonResult() { Data = new { CompletedWorkoutInstances = CompletedWorkoutInstances , TotalPercentage = TotalPercentage, TotalPoints = TotalPoints, UserName = UserName }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        public JsonResult DatePercentageListRefresh()
+        {
+            var datePercentageList = qService.GetCompletedWorkoutInstances_DatePercentageList(User.Identity.Name);
+        
+            return new JsonResult() { Data = new { datePercentageList = datePercentageList }, ContentEncoding = Encoding.UTF8, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
     }
 }
