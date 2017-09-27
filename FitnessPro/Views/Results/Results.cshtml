@@ -8,6 +8,8 @@
     <div id="Results">
         <h2>User Performance</h2>
         <p>Username: <strong data-bind="text:UserName"></strong></p>
+        
+
         <table class="table">
             <thead>
                 <tr>
@@ -34,10 +36,30 @@
                 </tr>
             </tfoot>
         </table>
-        <input type="button" value="Diagram" class="btn btn-info" data-toggle="modal" data-target="#ResultDiagram" ,data-bind="click:$parent.refreshDatePercentage, visible:!Status" />
-        @Html.Partial("Diagram")
-</div>
+        <div>
+        <div class="wrapper">
+            <script src="~/Scripts/Chart.js"></script>
+            <canvas id="resultChart"></canvas>
+        </div>
+        <script src="~/Scripts/ViewModels/Diagram.js"></script>
+        </div>
+        
+        <div>
+        <div class="wrapper">
+            <script src="~/Scripts/Chart.js"></script>
+            <canvas id="resultWorkoutChart"></canvas>
+        </div>
+        <script src="~/Scripts/ViewModels/Diagram.js"></script>
+        </div>
+ </div>
 </body>
+<script>
+    $(function () {
+      var vm = new Diagram();
+      vm.refreshDatePercentage();
+  });
+</script>
+
 <script>
     $(function () {
         var vm = new Result();
@@ -45,4 +67,3 @@
         ko.applyBindings(vm, $("#CompletedWorkoutInstances").get(0));
     });
 </script>
-

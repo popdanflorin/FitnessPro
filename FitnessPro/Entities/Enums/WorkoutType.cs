@@ -7,11 +7,12 @@ namespace FitnessPro.Entities.Enums
 {
     public enum WorkoutType
     {
-        Abs,
-        Back,
         Chest,
+        Back,
         Legs,
+        Biceps, 
+        Triceps,
         Shoulders,
-        Arms
+        Abs
     }
 }

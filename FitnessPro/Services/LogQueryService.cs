@@ -12,7 +12,7 @@ namespace FitnessPro.Services
         private ApplicationDbContext ctx = new ApplicationDbContext();
         public List<Log> GetLogs(string UserName)
         {
-            return ctx.Logs.Where(wie => wie.UserId == UserName).ToList();
+            return ctx.Logs.Where(wie => wie.UserId == UserName).OrderByDescending(wie => wie.LogDate).ToList();
         }
     }
 }

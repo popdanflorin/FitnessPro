@@ -261,7 +261,6 @@
     <Content Include="Scripts\ViewModels\Result.js" />
     <Content Include="Scripts\ViewModels\WorkoutInstance.js" />
     <Content Include="Scripts\ViewModels\Workout.js" />
-    <Content Include="Views\Results\index.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -308,7 +307,6 @@
     <Content Include="Views\WorkoutInstance\DetailsCompleted.cshtml" />
     <Content Include="Views\Workout\Item3.cshtml" />
     <Content Include="Views\Logs\Logs.cshtml" />
-    <Content Include="Views\Results\Diagram.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

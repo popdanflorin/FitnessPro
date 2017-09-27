@@ -54,6 +54,42 @@
             success: function (data) {
                 console.log(data);
                 self.WorkoutInstanceExercises(data.Exercises);
+                var plannedRepetitionList = [];
+                var actualRepetitionList = [];
+                var exerciseNameList2 = [];
+                var len = self.WorkoutInstanceExercises().length;
+                for (var i = 0, len; i < len; i++) {
+                    plannedRepetitionList[i] = self.WorkoutInstanceExercises()[i].PlannedRepetitions;
+                    actualRepetitionList[i] = self.WorkoutInstanceExercises()[i].ActualRepetitions;
+                    exerciseNameList2[i] = self.WorkoutInstanceExercises()[i].ExerciseName;
+                }
+                plannedRepetitionList[len] = 0;
+                var ctx = document.getElementById("ActualChart");
+                var resultChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: exerciseNameList2,
+                        datasets: [
+                          {
+                              data: plannedRepetitionList,
+                              backgroundColor: ['#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845'],
+                             label: "Planned Repetitions",
+                          },
+                        {
+                            data: actualRepetitionList,
+                            backgroundColor: ['#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039'],
+                            label: "Actual Repetitions",
+                    }
+                        ]
+                    },
+                    options: {
+                    animation: {
+                    onProgress: function(animation) {
+                    progress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
+                }
+            }
+        }
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);

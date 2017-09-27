@@ -24,7 +24,7 @@ namespace FitnessPro.Services
             return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Active == true && wie.UserId == userName ).ToList();
         }
         public List<WorkoutInstance> GetCompletedWorkoutInstances(string userName) {
-            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Status == Entities.Enums.StatusType.Completed && wie.UserId == userName).ToList();
+            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Status == Entities.Enums.StatusType.Completed && wie.UserId == userName).OrderByDescending(wie => wie.Date).ToList();
         }
         public List<WorkoutInstanceExercise> GetWorkoutInstanceExercises(string workoutInstanceId) {
             var exercises = ctx.WorkoutExercises.ToList();
@@ -102,7 +102,45 @@ namespace FitnessPro.Services
                     }
                 }
             }
+            //order by date
+           datePercentageList = datePercentageList.OrderBy(w => w.Date).ToList();
             return datePercentageList;
+        }
+        public List<WorkoutInstance> GetCompletedWorkoutInstances_WorkoutPercentageList(string userName)
+        {
+            var cmpList = ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Status == Entities.Enums.StatusType.Completed && wie.UserId == userName).ToList();
+            var workoutPercentageList = new List<WorkoutInstance>();
+            foreach (var wI in cmpList)
+            {
+                //workoutList: all the entities with the workoutName of wI.WorkoutName
+                var workoutList = cmpList.Where(w => w.WorkoutName == wI.WorkoutName).ToList();
+                var percentage = 0.0;
+                foreach (var i in workoutList)
+                {
+                    percentage += i.Percentage;
+                }
+                percentage = percentage / (workoutList.Count());
+                var workoutInstance = new WorkoutInstance();
+                workoutInstance.Id = Guid.NewGuid().ToString();
+                workoutInstance.Date = wI.Date;
+                workoutInstance.Percentage = percentage;
+                workoutInstance.Status = StatusType.Planned;
+                workoutInstance.Workout = wI.Workout;
+                workoutInstance.WorkoutId = wI.WorkoutId;
+                workoutPercentageList.Add(workoutInstance);
+            }
+            //eliminate duplicates by WorkoutName field
+            for (var i = 0; i < workoutPercentageList.Count(); i++)
+            {
+                for (var j = i + 1; j < workoutPercentageList.Count(); j++)
+                {
+                    if (workoutPercentageList[j].WorkoutName == workoutPercentageList[i].WorkoutName)
+                    {
+                        workoutPercentageList.RemoveAt(j);
+                    }
+                }
+            }
+            return workoutPercentageList;
         }
     }
 }
