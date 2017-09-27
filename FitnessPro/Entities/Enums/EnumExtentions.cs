@@ -12,7 +12,8 @@ namespace FitnessPro.Entities.Enums
             switch (type)
             {
                 case WorkoutType.Abs: return "Abs";
-                case WorkoutType.Arms: return "Arms";
+                case WorkoutType.Biceps: return "Biceps";
+                case WorkoutType.Triceps: return "Triceps";
                 case WorkoutType.Back: return "Back";
                 case WorkoutType.Chest: return "Chest";
                 case WorkoutType.Legs: return "Legs";
