@@ -1,4 +1,11 @@
-﻿
+﻿<style>
+    #Item3 table{
+        table-layout:fixed;
+        width:100%;
+    }
+   
+
+</style>
 
 <div id="Item3" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -14,24 +21,24 @@
                     <thead>
                         <tr>
                            
-                            <th>Entity</th>
-                            <th>Name</th>
-                            <th>LogDate</th>
-                            <th>Operation</th>
-                            <th>Property</th>
-                            <th>OldValue</th>
-                            <th>NewValue</th>
+                            <th width="20%">Entity</th>
+                            <th width="10%">Name</th>
+                            <th width="15%">LogDate</th>
+                            <th width="15%">Operation</th>
+                            <th width="15%">Property</th>
+                            <th width="15%">OldValue</th>
+                            <th width="10%">NewValue</th>
         
                         </tr>
                     </thead>
                     <tbody data-bind="foreach:Logs">
                         <tr>
-                            <td class="col-xs-5" data-bind="text:EntitieTypes"></td>
-                            <td class="col-xs-5" data-bind="text:ExerciseName"></td>
-                            <td class="col-xs-5" data-bind="text:moment(LogDate).format('LL') "></td>
-                            <td class="col-xs-5" data-bind="text:OperationTypes"></td>
-                            <td class="col-xs-5" data-bind="text:Property"></td>
-                            <td class="col-xs-5" data-bind="text: OldValue">
+                            <td  class="col-xs-5" data-bind="text:EntitieTypes"></td>
+                            <td  class="col-xs-5" data-bind="text:ExerciseName"></td>
+                            <td  class="col-xs-5" data-bind="text:moment(LogDate).format('LL') "></td>
+                            <td  class="col-xs-5" data-bind="text:OperationTypes"></td>
+                            <td  class="col-xs-5" data-bind="text:Property"></td>
+                            <td  class="col-xs-5" data-bind="text: OldValue">
                                <!-- <textarea id="OldValue" type="text" data-bind="value: OldValue"></textarea>-->
                             </td>
                             <td class="col-xs-5" data-bind="text: NewValue">
