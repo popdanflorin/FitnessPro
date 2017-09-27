@@ -82,13 +82,7 @@
                     }
                         ]
                     },
-                    options: {
-                    animation: {
-                    onProgress: function(animation) {
-                    progress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
-                }
-            }
-        }
+                    
                 });
             },
             error: function (jqXHR, textStatus, errorThrown) {
