@@ -29,7 +29,19 @@
                             <td><strong data-bind="text: ActualRepetitions"></strong></td>
                         </tr>
                     </tbody>
-                </table>
+                </table>               
+                <p>Planned Repetitions</p>                          
+                <div class="wrapper" width="400" height="400">
+                     <script src="~/Scripts/Chart.js"></script>
+                     <canvas id="PlannedChart"></canvas>
+                </div>
+                <script src="~/Scripts/ViewModels/WorkoutInstance.js"></script>
+                <p>Actual Repetitions</p>     
+                <div class="wrapper" width="400" height="400">
+                     <script src="~/Scripts/Chart.js"></script>
+                     <canvas id="ActualChart"></canvas>
+                </div>
+                <script src="~/Scripts/ViewModels/WorkoutInstance.js"></script>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -38,7 +50,6 @@
     </div>
 </div>
 <script>
-    
     ko.bindingHandlers.datePicker = {
         init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
             // Register change callbacks to update the model

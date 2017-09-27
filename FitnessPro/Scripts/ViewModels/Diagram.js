@@ -26,7 +26,8 @@
                         labels: dateList,
                         datasets: [
                           {
-                              data: percentageList
+                              data: percentageList,
+                              
                           }
                         ]
                     }
