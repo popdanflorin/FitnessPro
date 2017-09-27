@@ -24,7 +24,7 @@ namespace FitnessPro.Services
             return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Active == true && wie.UserId == userName ).ToList();
         }
         public List<WorkoutInstance> GetCompletedWorkoutInstances(string userName) {
-            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Status == Entities.Enums.StatusType.Completed && wie.UserId == userName).ToList();
+            return ctx.WorkoutInstances.Include("Workout").Where(wie => wie.Status == Entities.Enums.StatusType.Completed && wie.UserId == userName).OrderByDescending(wie => wie.Date).ToList();
         }
         public List<WorkoutInstanceExercise> GetWorkoutInstanceExercises(string workoutInstanceId) {
             var exercises = ctx.WorkoutExercises.ToList();

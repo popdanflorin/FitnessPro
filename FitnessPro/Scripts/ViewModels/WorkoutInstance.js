@@ -55,60 +55,31 @@
                 console.log(data);
                 self.WorkoutInstanceExercises(data.Exercises);
                 var plannedRepetitionList = [];
-                var exerciseNameList = [];
-                var len = self.WorkoutInstanceExercises().length;
-                for (var i = 0, len; i < len; i++) {
-                    plannedRepetitionList[i] = self.WorkoutInstanceExercises()[i].PlannedRepetitions;
-                    exerciseNameList[i] = self.WorkoutInstanceExercises()[i].ExerciseName;
-                }
-
-                var ctx = document.getElementById("PlannedChart");
-                var resultChart = new Chart(ctx, {
-                    type: 'polarArea',
-                    data: {
-                        labels: exerciseNameList,
-                        datasets: [
-                          {
-                              data: plannedRepetitionList,
-                              backgroundColor: [
-                                 '#581845',
-                                 '#900C3F',
-                                 '#C70039',
-                                  '#FF5733',
-                                  '#FFC300',
-                                  '#DAF7A6'  
-                              ]
-                          }
-                        ]
-                        
-                    }
-
-                });
                 var actualRepetitionList = [];
                 var exerciseNameList2 = [];
                 var len = self.WorkoutInstanceExercises().length;
                 for (var i = 0, len; i < len; i++) {
+                    plannedRepetitionList[i] = self.WorkoutInstanceExercises()[i].PlannedRepetitions;
                     actualRepetitionList[i] = self.WorkoutInstanceExercises()[i].ActualRepetitions;
                     exerciseNameList2[i] = self.WorkoutInstanceExercises()[i].ExerciseName;
                 }
-
+                plannedRepetitionList[len] = 0;
                 var ctx = document.getElementById("ActualChart");
                 var resultChart = new Chart(ctx, {
-                    type: 'polarArea',
+                    type: 'bar',
                     data: {
                         labels: exerciseNameList2,
                         datasets: [
                           {
-                              data: actualRepetitionList,
-                              backgroundColor: [
-                               '#581845',
-                                 '#900C3F',
-                                 '#C70039',
-                                  '#FF5733',
-                                  '#FFC300',
-                                  '#DAF7A6'
-                              ]
-                          }
+                              data: plannedRepetitionList,
+                              backgroundColor: ['#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845']
+                             
+                          },
+                        {
+                            data: actualRepetitionList,
+                            backgroundColor: ['#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039']
+                          
+                    }
                         ]
                     }
                 });
