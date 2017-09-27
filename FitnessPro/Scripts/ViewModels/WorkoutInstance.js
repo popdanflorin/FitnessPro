@@ -72,16 +72,23 @@
                         datasets: [
                           {
                               data: plannedRepetitionList,
-                              backgroundColor: ['#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845']
-                             
+                              backgroundColor: ['#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845', '#581845'],
+                             label: "Planned Repetitions",
                           },
                         {
                             data: actualRepetitionList,
-                            backgroundColor: ['#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039']
-                          
+                            backgroundColor: ['#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039', '#C70039'],
+                            label: "Actual Repetitions",
                     }
                         ]
-                    }
+                    },
+                    options: {
+                    animation: {
+                    onProgress: function(animation) {
+                    progress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
+                }
+            }
+        }
                 });
             },
             error: function (jqXHR, textStatus, errorThrown) {

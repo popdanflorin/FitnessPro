@@ -27,7 +27,7 @@
                         datasets: [
                           {
                               data: percentageList,
-                              
+                              label: "Average Percentage / Day",
                           }
                         ]
                     }
