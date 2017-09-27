@@ -78,10 +78,11 @@
             data: workout,
             success: function (data) {
                 console.log(data);
-           
+                
                 self.refresh();
             },
             error: function (jqXHR, textStatus, errorThrown) {
+                alert(data);
                 console.log(textStatus + ': ' + errorThrown);
             }
         });
@@ -153,8 +154,10 @@
             data: { workoutId: data.Id },
             success: function (data) {
                 console.log(data);
+                
                 self.Exercises(data.Exercises);
                 self.ExWorkoutId(workoutId);
+                
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);
@@ -165,6 +168,7 @@
     //save exercise
     self.saveEx = function () {
         var url = '/Workout/SaveEx';
+        
         var exercise = JSON.stringify({
             Id: self.Id(),
             workoutId: self.ExWorkoutId(),
@@ -180,8 +184,8 @@
             data: exercise,
             success: function (data) {
                 console.log(data);
-                self.refresh();
                 $('#workoutNewEx').modal('hide');
+                self.refreshEx(self.ExWorkoutId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);
@@ -201,7 +205,7 @@
             data: exercise,
             success: function (data) {
                 console.log(data);
-                self.refreshEx(workoutId)
+                self.refreshEx(workoutId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);

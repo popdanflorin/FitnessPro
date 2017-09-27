@@ -1,4 +1,6 @@
-﻿<div id="Item3" class="modal fade" role="dialog">
+﻿
+
+<div id="Item3" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -29,8 +31,12 @@
                             <td class="col-xs-5" data-bind="text:moment(LogDate).format('LL') "></td>
                             <td class="col-xs-5" data-bind="text:OperationTypes"></td>
                             <td class="col-xs-5" data-bind="text:Property"></td>
-                            <td class="col-xs-5" data-bind="text:OldValue"></td>
-                            <td class="col-xs-5" data-bind="text:NewValue"></td>
+                            <td class="col-xs-5">
+                                <textarea id="OldValue" type="text" data-bind="value: OldValue"></textarea>
+                            </td>
+                            <td class="col-xs-5">
+                                <textarea id="NewValue" type="text" data-bind="value: NewValue"></textarea>
+                            </td>
                         </tr>
 
                     </tbody>
