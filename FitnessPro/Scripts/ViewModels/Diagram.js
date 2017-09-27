@@ -17,8 +17,8 @@
                 for (var i = 0, len; i < len; i++) {
                     percentageList[i] = self.datePercentageList()[i].Percentage;
                     dateList[i] = self.datePercentageList()[i].Date;
-                   
                 }
+                
                 var ctx = document.getElementById("resultChart");
                 var resultChart = new Chart(ctx, {
                     type: 'line',
@@ -39,18 +39,4 @@
         
     }
     
-   /*var date = ["2017-09-11", "2017-10-01", "2017-10-03", "2017-08-10"];
-   var percentage = [107.00, 96.22, 203.22, 50.00];
-    var ctx = document.getElementById("resultChart");
-    var resultChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: date,
-            datasets: [
-              {
-                  data: percentage
-              }
-            ]
-        }
-    })*/
 }

@@ -102,6 +102,8 @@ namespace FitnessPro.Services
                     }
                 }
             }
+            //order by date
+           datePercentageList = datePercentageList.OrderBy(w => w.Date).ToList();
             return datePercentageList;
         }
     }
