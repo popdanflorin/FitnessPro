@@ -77,13 +77,22 @@
             contentType: "application/json; charset=utf-8",
             data: workout,
             success: function (data) {
-                console.log(data);
-                
-                self.refresh();
+                if (data.Type == 0) {
+                    console.log(data);
+                    $('#workoutItem').modal('hide');
+                    self.refresh();
+                }
+                else {
+                    $('#errordiv').text(data.Message);
+                    
+                    //alert(data.Message);
+                  
+
+                }
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(data);
-                console.log(textStatus + ': ' + errorThrown);
+           error: function (jqXHR, textStatus, errorThrown) {
+                
+               console.log(textStatus + ': ' + errorThrown);
             }
         });
     };
@@ -183,9 +192,19 @@
             contentType: "application/json; charset=utf-8",
             data: exercise,
             success: function (data) {
-                console.log(data);
-                $('#workoutNewEx').modal('hide');
-                self.refreshEx(self.ExWorkoutId);
+                if (data.Type == 0) {
+                    console.log(data);
+                    $('#workoutNewEx').modal('hide');
+                    self.refreshEx(self.ExWorkoutId);
+                }
+                else {
+                    $('#errordivex').text(data.Message);
+
+                    //alert(data.Message);
+
+
+                }
+               
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);
@@ -232,7 +251,13 @@
     self.hideNewExercise = function ()
     {
         $('#workoutNewEx').modal('hide');
+        $('#errordivex').text("");
     }
+    self.hideErrorforNexWOnClose = function () {
+        $('#workoutItem').modal('hide');
+        $('#errordiv').text("");
+    }
+
 
     self.holdForDeleteEx = function (data) {
         self.Id(data.Id);

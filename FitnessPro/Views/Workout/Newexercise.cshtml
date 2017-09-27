@@ -4,8 +4,11 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-bind="click:hideNewExercise">&times;</button>
                 <h4 class="modal-title">New ex</h4>
+            </div>
+            <div id="errordivex" style="color:#cc0000; text-align:center;font-weight: bold">
+
             </div>
             <div class="modal-body">
                 <label for="Name">Name</label>

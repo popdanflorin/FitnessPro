@@ -16,9 +16,12 @@ namespace FitnessPro.Services
         private const string ErrorMessage = "An application exception occured performing action.";
         private const string ItemNotFoundMessage = "The item was not found.";
         private const string AddWorkoutMessage = "You can't add a workout if you dont add a name .";
+        private const string Addwithoutname = "You can't add an item if you don't complete the Name!!!";
+        private const string Addwithoutnameanddesc = "You can't add an item if you don't complete the Name and Description!!!";
+        private const string Addwithoutdescription = "You can't add an item if you don't complete the description!!!";
         private const string DateTimeFormat = "yyyyMMddHHmmss";
 
-        public string SaveWorkout(Workout workout)
+        public CommunicationMessage SaveWorkout(Workout workout)
         {
             try
             {
@@ -27,16 +30,40 @@ namespace FitnessPro.Services
 
                 if (oldWorkout == null)
                 {
-                    var log = InitLog();
-                    //add
-                    workout.Id = Guid.NewGuid().ToString();
-                    workout.Active = true;
+                    if (workout.Name != null && workout.Description != null)
+                    {
+                        var log = InitLog();
+                        //add
+                        workout.Id = Guid.NewGuid().ToString();
+                        workout.Active = true;
 
-                    log.PrimaryEntityId = workout.Id;
-                    log.Type = Operations.Add;
-                    logs.Add(log);
+                        log.PrimaryEntityId = workout.Id;
+                        log.Type = Operations.Add;
+                        logs.Add(log);
 
-                    ctx.Workouts.Add(workout);
+                        ctx.Workouts.Add(workout);
+                    }
+                    else
+                    {
+                        if (workout.Name == null && workout.Description == null)
+                        {
+                            return new CommunicationMessage() { Message = Addwithoutnameanddesc, Type = MessageType.Error };
+                        }
+                        else
+                        {
+                            if (workout.Name == null)
+                            {
+                                return new CommunicationMessage() { Message = Addwithoutname, Type = MessageType.Error };
+                            }
+                            else
+                            {
+                                if (workout.Description == null)
+                                {
+                                    return new CommunicationMessage() { Message = Addwithoutdescription, Type = MessageType.Error };
+                                }
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -79,17 +106,17 @@ namespace FitnessPro.Services
                     }
                     else
                     {
-                        return AddWorkoutMessage;
+                        return new CommunicationMessage() { Message = AddWorkoutMessage, Type = MessageType.Error };
                     }
                 }
                 ctx.Logs.AddRange(logs);
                 ctx.SaveChanges();
 
-                return SuccessMessage;
+                return new CommunicationMessage() { Message = SuccessMessage, Type = MessageType.Succes };
             }
             catch (Exception ex)
             {
-                return ErrorMessage;
+                return new CommunicationMessage() { Message = ErrorMessage, Type = MessageType.Error };
             }
         }
 
@@ -140,17 +167,17 @@ namespace FitnessPro.Services
             }
         }
         //save workoutexercise
-        public string SaveWorkoutexercise(WorkoutExercise exercise)
+        public CommunicationMessage SaveWorkoutexercise(WorkoutExercise exercise)
         {
             try
             {
                 var oldexercise = ctx.WorkoutExercises.FirstOrDefault(f => f.Id == exercise.Id);
                 var logs = new List<Log>();
 
-               
+
 
                 if (oldexercise == null)
-                {
+                {   if(exercise.Name!=null && exercise.Description != null) { 
                     var log = InitLogEx();
                     //add
                     exercise.Id = Guid.NewGuid().ToString();
@@ -162,6 +189,29 @@ namespace FitnessPro.Services
                     logs.Add(log);
 
                     ctx.WorkoutExercises.Add(exercise);
+                    }
+                    else
+                    {
+                        if (exercise.Name == null && exercise.Description == null)
+                        {
+                            return new CommunicationMessage() { Message = Addwithoutnameanddesc, Type = MessageType.Error };
+                        }
+                        else
+                        {
+                            if (exercise.Name == null)
+                            {
+                                return new CommunicationMessage() { Message = Addwithoutname, Type = MessageType.Error };
+                            }
+                            else
+                            {
+                                if (exercise.Description == null)
+                                {
+                                    return new CommunicationMessage() { Message = Addwithoutdescription, Type = MessageType.Error };
+                                }
+                            }
+                        }
+                    }
+
                 }
                 else
                 {
@@ -207,18 +257,18 @@ namespace FitnessPro.Services
                     }
                     else
                     {
-                        return AddWorkoutMessage;
+                        return new CommunicationMessage() { Message = AddWorkoutMessage, Type = MessageType.Error };
                     }
                 }
                 ctx.Logs.AddRange(logs);
 
                 ctx.SaveChanges();
 
-                return SuccessMessage;
+                return new CommunicationMessage() { Message = SuccessMessage, Type = MessageType.Succes };
             }
             catch (Exception ex)
             {
-                return ErrorMessage;
+                return new CommunicationMessage() { Message = ErrorMessage, Type = MessageType.Error };
             }
         }
         //delete WorkoutExercise

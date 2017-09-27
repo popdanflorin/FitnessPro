@@ -1,13 +1,18 @@
-﻿<div id="workoutItem" class="modal fade" role="dialog">
+﻿
+<div id="workoutItem" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
+ 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-bind="click:hideErrorforNexWOnClose">&times;</button>
                 <h4 class="modal-title">Manage workout</h4>
             </div>
+            <div id="errordiv" style="color:#cc0000; text-align:center;font-weight: bold" >
+                
+            </div>
             <div class="modal-body">
+                
                 <label for="Name">Name</label>
                 <input id="Name" type="text" class="form-control" data-bind="value: Name">
                 <label for="Description">Description</label>
@@ -16,8 +21,8 @@
                 <select id="Type" class="form-control" data-bind="options:Types, optionsText: 'Description', optionsValue: 'Id', value: Type, optionsCaption: 'Choose...'"></select>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click:save">Save</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success"  data-bind="click:save">Save</button>
+                <button type="button" class="btn btn-default" data-bind="click:hideErrorforNexWOnClose">Close</button>
             </div>
         </div>
     </div>
