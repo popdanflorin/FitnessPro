@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <p>Name: <strong data-bind="text: WorkoutName"></strong></p>
                 <input id="Date" type="date" class="form-control" data-bind="datePicker : Date" /> 
-                <p>Rounds: <input type="number" class="form-control" data-bind="value: Rounds"/></p>
+                <p>Rounds: <input type="number" class="form-control" data-bind="value: Rounds" min="1"/></p>
                 <label for="Exercises">Exercises</label>
                 <table class="table">
                     <thead>
@@ -24,7 +24,7 @@
                     <tbody data-bind="foreach:WorkoutInstanceExercises">
                         <tr>
                             <td class="col-xs-5" data-bind="text:ExerciseName"></td>
-                            <td><input type="number" class="form-control" data-bind="value: PlannedRepetitions" /></td>
+                            <td><input type="number" class="form-control" data-bind="value: PlannedRepetitions" min="0"/></td>
                         </tr>
                     </tbody>
                 </table>

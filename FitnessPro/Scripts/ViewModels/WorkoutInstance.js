@@ -64,6 +64,7 @@
                     exerciseNameList2[i] = self.WorkoutInstanceExercises()[i].ExerciseName;
                 }
                 plannedRepetitionList[len] = 0;
+             
                 var ctx = document.getElementById("ActualChart");
                 var resultChart = new Chart(ctx, {
                     type: 'bar',
@@ -81,9 +82,15 @@
                             label: "Actual Repetitions",
                     }
                         ]
+
                     },
+                   
+                   
+                  
                     
                 });
+                
+               
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + ': ' + errorThrown);
