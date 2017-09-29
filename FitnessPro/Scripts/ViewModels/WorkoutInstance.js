@@ -1,5 +1,6 @@
 ﻿function WorkoutInstance() {
     var self = this;
+    self.resultChart = null;
     self.Workouts = ko.observableArray();
     self.WorkoutInstances = ko.observableArray();
     self.Statuses = ko.observableArray();
@@ -66,7 +67,11 @@
                 plannedRepetitionList[len] = 0;
              
                 var ctx = document.getElementById("ActualChart");
-                var resultChart = new Chart(ctx, {
+               
+                if (self.resultChart != null)
+                    self.resultChart.destroy();
+
+                self.resultChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: exerciseNameList2,

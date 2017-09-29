@@ -20,7 +20,7 @@
                     percentageList[i] = self.datePercentageList()[i].Percentage;
                     dateList[i] = moment(self.datePercentageList()[i].Date).format("YYYY-MM-DD")
                 }
-
+                percentageList[len] = 0.0;
                 var ctx = document.getElementById("resultChart");
                 var resultChart = new Chart(ctx, {
                     type: 'line',
@@ -51,7 +51,7 @@
                           {
                               data: percentageList2,
                               label: "Average Percentage / Workout",
-                              backgroundColor: ['#581845', '#900C3F', '#C70039', '#FF5733', '#FFC300', '#DAF7A6', '#581845', '#581845', '#581845', '#581845'],
+                              backgroundColor: ['rgba(88, 24, 69, 0.7)', 'rgba(144, 12, 63, 0.7)', 'rgba(255, 87, 51, 0.7)', 'rgba(255, 195, 0, 0.7)','rgba(218, 247, 166, 0.7)', 'rgba(97, 191, 136, 0.5)', '#900C3F', '#C70039', '#FF5733', '#FFC300', '#DAF7A6', '#581845', '#581845', '#581845', '#581845'],
                           }
                         ]
                     }

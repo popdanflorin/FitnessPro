@@ -36,22 +36,21 @@
                 </tr>
             </tfoot>
         </table>
-        <div>
-        <div class="wrapper">
-            <script src="~/Scripts/Chart.js"></script>
-            <canvas id="resultChart"></canvas>
+            <h2 align="center">Average percentage/ Day</h2>
+            <div>
+                <div class="wrapper">
+                    <canvas id="resultChart"></canvas>
+                </div>
+                <script src="~/Scripts/ViewModels/Diagram.js"></script>
+            </div>
+            <h2 align="center">Average percentage/ Workout</h2>
+            <div>
+                <div class="wrapper">
+                    <canvas id="resultWorkoutChart"></canvas>
+                </div>
+                <script src="~/Scripts/ViewModels/Diagram.js"></script>
+            </div>
         </div>
-        <script src="~/Scripts/ViewModels/Diagram.js"></script>
-        </div>
-        
-        <div>
-        <div class="wrapper">
-            <script src="~/Scripts/Chart.js"></script>
-            <canvas id="resultWorkoutChart"></canvas>
-        </div>
-        <script src="~/Scripts/ViewModels/Diagram.js"></script>
-        </div>
- </div>
 </body>
 <script>
     $(function () {
